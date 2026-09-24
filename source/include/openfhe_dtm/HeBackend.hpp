@@ -38,6 +38,8 @@ public:
     virtual CipherVector mul(const CipherVector& a, const CipherVector& b) const = 0;
     virtual CipherVector mulPlain(const CipherVector& a, const PlainVector& b) const = 0;
     virtual CipherVector subPlain(const CipherVector& a, const PlainVector& b) const = 0;
+    // Plaintext minus ciphertext, with an encrypted result.
+    virtual CipherVector plainSub(const PlainVector& a, const CipherVector& b) const = 0;
     virtual CipherVector mulScalar(const CipherVector& a,
                                    std::complex<double> scalar) const = 0;
     virtual CipherVector conjugate(const CipherVector& a) const = 0;

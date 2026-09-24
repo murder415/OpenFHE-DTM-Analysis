@@ -27,6 +27,7 @@ public:
     CipherVector mul(const CipherVector& a, const CipherVector& b) const override;
     CipherVector mulPlain(const CipherVector& a, const PlainVector& b) const override;
     CipherVector subPlain(const CipherVector& a, const PlainVector& b) const override;
+    CipherVector plainSub(const PlainVector& a, const CipherVector& b) const override;
     CipherVector mulScalar(const CipherVector& a, std::complex<double> scalar) const override;
     CipherVector conjugate(const CipherVector& a) const override;
     CipherVector rotate(const CipherVector& a, int offset) const override;

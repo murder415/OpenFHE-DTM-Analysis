@@ -364,6 +364,15 @@ CipherVector OpenFheBackend::subPlain(const CipherVector& a, const PlainVector& 
 #endif
 }
 
+CipherVector OpenFheBackend::plainSub(const PlainVector& a, const CipherVector& b) const {
+#ifdef OPENFHE_DTM_ENABLE_OPENFHE
+    return wrapCipher(impl_->cc->EvalSub(*asPlain(a), *asCipher(b)), impl_->slots, b.level);
+#else
+    (void)a; (void)b;
+    throw std::runtime_error("OpenFHE support is disabled");
+#endif
+}
+
 CipherVector OpenFheBackend::mulScalar(const CipherVector& a,
                                        std::complex<double> scalar) const {
 #ifdef OPENFHE_DTM_ENABLE_OPENFHE

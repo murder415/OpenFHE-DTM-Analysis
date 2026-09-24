@@ -9,6 +9,7 @@ add_library(openfhe_dtm_core STATIC
     src/TdbDataset.cpp
     src/elevation/Elevation.cpp
     src/earthwork/Excavation.cpp
+    src/earthwork/ThetaPlane.cpp
     src/dem/EncryptedDem.cpp
     src/slope/SlopeGrid.cpp
 )
