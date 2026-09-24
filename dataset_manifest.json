@@ -1,0 +1,11 @@
+{
+  "included": false,
+  "sha256": "a1ae7ba8a61b7138cbceb6f3cf3ec78942603a0a0bc91a71a502f78714be7363",
+  "bytes": 13208385,
+  "package_path": "data/taiwan.tdb",
+  "usage_if_external": "Pass --tdb <absolute DEM path> to benchmark_process.py, or pass the DEM path as the first positional argument to each compiled validation/demo executable.",
+  "source_product": "Copernicus DEM GLO-30 Public 2021",
+  "doi": "10.5270/ESA-c5d3d65",
+  "source_url": "https://registry.opendata.aws/copernicus-dem/",
+  "note": "The recorded Taiwan fixture is not redistributed here. Provide a local text TDB with the recorded SHA-256 to reproduce the Taiwan runs exactly. Synthetic regression tests do not require it."
+}

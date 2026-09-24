@@ -1,0 +1,1863 @@
+{
+  "description": "Public GitHub snapshot. Local paths in evidence are redacted; measured numbers and original source/data/executable hashes are retained.",
+  "excluded": [
+    "original DEM fixture",
+    "private keys",
+    "build products",
+    "execution caches",
+    "paper documents",
+    "code_guide review notes"
+  ],
+  "files": [
+    {
+      "path": ".gitattributes",
+      "bytes": 77,
+      "sha256": "6aadcd22985702875bd036e85fa1f7eae024c21ce6833824e96fa6f3d116e87c"
+    },
+    {
+      "path": ".gitignore",
+      "bytes": 191,
+      "sha256": "4953863ccf02b6171639c4b7187b14c37133c73b508c3c5b60ab4943fb0d33d4"
+    },
+    {
+      "path": "benchmark_process.py",
+      "bytes": 17539,
+      "sha256": "beb28f228fa4663320ebca045e8696e3ec61ef9d80677e047fd76e550e2818bd"
+    },
+    {
+      "path": "CMakeLists.txt",
+      "bytes": 1316,
+      "sha256": "1d095792f227fa8878f30d19f82d50f04d27f6122ff495aa3448301351d8b832"
+    },
+    {
+      "path": "dataset_manifest.json",
+      "bytes": 711,
+      "sha256": "251b227e6209fbb732e7f027a3081e2faf412df0c608d5b6fb827943b68de7cc"
+    },
+    {
+      "path": "earthwork_slope_validation.cpp",
+      "bytes": 43482,
+      "sha256": "b327e4c429e4541737439ed2959e5a1d2947114e34dad8017fbd437f990f30b3"
+    },
+    {
+      "path": "final_analysis_demo.cpp",
+      "bytes": 4412,
+      "sha256": "1c82f9fe8fb72f2df2f0f98c36913472ebf7c64fc0addc0f307b1aa4829b2384"
+    },
+    {
+      "path": "implementation_source_audit.json",
+      "bytes": 14153,
+      "sha256": "00d14d0ccd70459e8ad64ccff0e1def41cc0639f2a7b05ee30eeec0708661550"
+    },
+    {
+      "path": "implementation_source_diff.patch",
+      "bytes": 21446,
+      "sha256": "481fd60fd5e16f5ce24efd9225f78a6c899ac7aad88fc325b148b346b1bae4bc"
+    },
+    {
+      "path": "logs/benchmarks/analysis/metadata.json",
+      "bytes": 2060,
+      "sha256": "8b4791a6d5f33fb3e9afda688223927552c1771565b8093940e16a6a3b6e383a"
+    },
+    {
+      "path": "logs/benchmarks/analysis/results.json",
+      "bytes": 7184,
+      "sha256": "2fa8992c74f60c366da3f8045166a3824d87d489b4d43328af91546442379d6a"
+    },
+    {
+      "path": "logs/benchmarks/analysis/run_1.stderr.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "logs/benchmarks/analysis/run_1.stdout.txt",
+      "bytes": 459,
+      "sha256": "8b036509d3dbc4c2c6d454533e4a710fb11467b553382b1f9bb3658020859fec"
+    },
+    {
+      "path": "logs/benchmarks/analysis/run_2.stderr.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "logs/benchmarks/analysis/run_2.stdout.txt",
+      "bytes": 468,
+      "sha256": "931154409da713eaa29c4df4814f0ccfb3afc5bc80a756e89743d0f948adbfa1"
+    },
+    {
+      "path": "logs/benchmarks/analysis/run_3.stderr.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "logs/benchmarks/analysis/run_3.stdout.txt",
+      "bytes": 458,
+      "sha256": "c37c59c7c1bb4c5b5ee3b3d7c3c4fb40d7bfa8e0806a435d49c4be1aec63bde3"
+    },
+    {
+      "path": "logs/benchmarks/analysis/run_4.stderr.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "logs/benchmarks/analysis/run_4.stdout.txt",
+      "bytes": 468,
+      "sha256": "dac43402aef7fac05247c5528abec1e52d164b06d8cf87eb26ae20cc1b178aaf"
+    },
+    {
+      "path": "logs/benchmarks/analysis/summary.json",
+      "bytes": 920,
+      "sha256": "07f97472dc5d0120054e4dd0edf4e914786e587413a269f26677d50cc91c8044"
+    },
+    {
+      "path": "logs/benchmarks/packing/metadata.json",
+      "bytes": 2302,
+      "sha256": "c8291dcc498f935a2e662d49d94400e23aafed55bcfb88ec7902ce9d7da56419"
+    },
+    {
+      "path": "logs/benchmarks/packing/results.json",
+      "bytes": 46398,
+      "sha256": "5739360ddd2fcb889f65b3fa4d179d434448684d11c4f806d08b00926305ddc6"
+    },
+    {
+      "path": "logs/benchmarks/packing/run_1.stderr.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "logs/benchmarks/packing/run_1.stdout.txt",
+      "bytes": 340,
+      "sha256": "c243dcd8353f6b3c95f66bdbc3ce8f4558a45a6ef6a8a0a81d82560ec6188625"
+    },
+    {
+      "path": "logs/benchmarks/packing/run_2.stderr.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "logs/benchmarks/packing/run_2.stdout.txt",
+      "bytes": 340,
+      "sha256": "e613fe3191de001d0b4552c9426c42d86595100803125561d0768c2d38a99302"
+    },
+    {
+      "path": "logs/benchmarks/packing/run_3.stderr.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "logs/benchmarks/packing/run_3.stdout.txt",
+      "bytes": 340,
+      "sha256": "e613fe3191de001d0b4552c9426c42d86595100803125561d0768c2d38a99302"
+    },
+    {
+      "path": "logs/benchmarks/packing/run_4.stderr.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "logs/benchmarks/packing/run_4.stdout.txt",
+      "bytes": 340,
+      "sha256": "e613fe3191de001d0b4552c9426c42d86595100803125561d0768c2d38a99302"
+    },
+    {
+      "path": "logs/benchmarks/packing/summary.json",
+      "bytes": 1087,
+      "sha256": "ba62bfc838e8fa2748ab8d195b7abcb24375778e5414045c6aee04e4a2993e96"
+    },
+    {
+      "path": "logs/ctest/1_ctest_final.txt",
+      "bytes": 755,
+      "sha256": "581b3e4a0d4d18b15af8d667db275fa1957d7e0d0ce3440066ae0f78ad81c6e2"
+    },
+    {
+      "path": "logs/ctest_final.txt",
+      "bytes": 755,
+      "sha256": "581b3e4a0d4d18b15af8d667db275fa1957d7e0d0ce3440066ae0f78ad81c6e2"
+    },
+    {
+      "path": "logs/earthwork/provenance.json",
+      "bytes": 3825,
+      "sha256": "e4eb5a00f2cc0398503b58d201c5e1bcc0a0ef989463b967834f9b66c722549b"
+    },
+    {
+      "path": "logs/earthwork/run_1/concave_selected_cells_live_trace.csv",
+      "bytes": 12603,
+      "sha256": "544cd7636bba992c49fd924d4ab9df49a9d0c66aac0747e1f3e03456ff6834e2"
+    },
+    {
+      "path": "logs/earthwork/run_1/concave_selected_cells_samples.csv",
+      "bytes": 3596,
+      "sha256": "28d1eb542dc6c3112a1d8dc1d08df76a73a7a27c79fe0151883f8c8899a322b2"
+    },
+    {
+      "path": "logs/earthwork/run_1/concave_selected_cells_trace.csv",
+      "bytes": 7714,
+      "sha256": "058f4c759284b68fdcc504939d1ea749b95825f6049cfcecfa062f54ce477aa2"
+    },
+    {
+      "path": "logs/earthwork/run_1/flat_cut_30_live_trace.csv",
+      "bytes": 4020,
+      "sha256": "585eed326165c12324c938bc6ed20671124756991955a41d9beff7d56e895244"
+    },
+    {
+      "path": "logs/earthwork/run_1/flat_cut_30_samples.csv",
+      "bytes": 2225,
+      "sha256": "946f7fdaf3d74b52feb160a0e09a02d475813d987ac00a85b970d7e8bba4b7f8"
+    },
+    {
+      "path": "logs/earthwork/run_1/flat_cut_30_trace.csv",
+      "bytes": 2593,
+      "sha256": "edf53f3c57f8b000136849b902276c000d6d609ec4f72793bc91f3292fda44ca"
+    },
+    {
+      "path": "logs/earthwork/run_1/flat_cut_45_live_trace.csv",
+      "bytes": 4012,
+      "sha256": "7d1bcd961f627b59a89b8c7342b641e536451e0bc7bdbc371e9ce0240211a587"
+    },
+    {
+      "path": "logs/earthwork/run_1/flat_cut_45_samples.csv",
+      "bytes": 2148,
+      "sha256": "0a20cad463a316e92d8ee57d43e94f164ceedf4699c9f19b36b2280b39ff9485"
+    },
+    {
+      "path": "logs/earthwork/run_1/flat_cut_45_trace.csv",
+      "bytes": 2593,
+      "sha256": "edf53f3c57f8b000136849b902276c000d6d609ec4f72793bc91f3292fda44ca"
+    },
+    {
+      "path": "logs/earthwork/run_1/flat_cut_60_live_trace.csv",
+      "bytes": 4020,
+      "sha256": "ef3335976502f3fe2fdcddbd5284dfd70756189c4588f4e64718eef7b5939f99"
+    },
+    {
+      "path": "logs/earthwork/run_1/flat_cut_60_samples.csv",
+      "bytes": 2147,
+      "sha256": "ec2d53c198036a7957dc8b226cdf6c0d2f3dc78eef74e6a7983f6f4f941fefa2"
+    },
+    {
+      "path": "logs/earthwork/run_1/flat_cut_60_trace.csv",
+      "bytes": 2593,
+      "sha256": "edf53f3c57f8b000136849b902276c000d6d609ec4f72793bc91f3292fda44ca"
+    },
+    {
+      "path": "logs/earthwork/run_1/flat_fill_30_live_trace.csv",
+      "bytes": 4022,
+      "sha256": "651bd1fac4cc855a7dbbc73aa2a03964e69f824d175f4538fb7b7b5f719bacbb"
+    },
+    {
+      "path": "logs/earthwork/run_1/flat_fill_30_samples.csv",
+      "bytes": 2216,
+      "sha256": "8184109df09d255f1830460b5122698d7b2291310324a3b76d334f517066ec15"
+    },
+    {
+      "path": "logs/earthwork/run_1/flat_fill_30_trace.csv",
+      "bytes": 2593,
+      "sha256": "edf53f3c57f8b000136849b902276c000d6d609ec4f72793bc91f3292fda44ca"
+    },
+    {
+      "path": "logs/earthwork/run_1/flat_fill_45_live_trace.csv",
+      "bytes": 4014,
+      "sha256": "0aeae23051a7ef4cfbaf0ffde26bc330c55ee3e0281153bcb31666cb89378997"
+    },
+    {
+      "path": "logs/earthwork/run_1/flat_fill_45_samples.csv",
+      "bytes": 2139,
+      "sha256": "7a8cad80d2334f218020edf288144495fcd72f5c78f4a2e7c208f9d5dec1d2ba"
+    },
+    {
+      "path": "logs/earthwork/run_1/flat_fill_45_trace.csv",
+      "bytes": 2593,
+      "sha256": "edf53f3c57f8b000136849b902276c000d6d609ec4f72793bc91f3292fda44ca"
+    },
+    {
+      "path": "logs/earthwork/run_1/flat_fill_60_live_trace.csv",
+      "bytes": 4022,
+      "sha256": "c160f254a034bb7aec26eed24aef1c76ab4bfed560049205ed98a75aaa776fa9"
+    },
+    {
+      "path": "logs/earthwork/run_1/flat_fill_60_samples.csv",
+      "bytes": 2137,
+      "sha256": "5c274f350f7f1e2552867cbef49de291faf643ff9300ff577198ea8fa11d1b31"
+    },
+    {
+      "path": "logs/earthwork/run_1/flat_fill_60_trace.csv",
+      "bytes": 2593,
+      "sha256": "edf53f3c57f8b000136849b902276c000d6d609ec4f72793bc91f3292fda44ca"
+    },
+    {
+      "path": "logs/earthwork/run_1/infeasible_boundary_live_trace.csv",
+      "bytes": 4022,
+      "sha256": "89149e942a21e98c2adb3e991609637b04c63e52e56549f9403ef56c0b4f44e7"
+    },
+    {
+      "path": "logs/earthwork/run_1/infeasible_boundary_samples.csv",
+      "bytes": 2388,
+      "sha256": "e429904c2dde40753f776f0da17757c61a5141c6fa1351c8b4c96c5424c735e8"
+    },
+    {
+      "path": "logs/earthwork/run_1/infeasible_boundary_trace.csv",
+      "bytes": 2593,
+      "sha256": "edf53f3c57f8b000136849b902276c000d6d609ec4f72793bc91f3292fda44ca"
+    },
+    {
+      "path": "logs/earthwork/run_1/multiple_batches_shared_nodes_live_trace.csv",
+      "bytes": 48194,
+      "sha256": "0e53505bd8e4d97ab1a84313dd65ea993e4582d0a1404aa4bbee632af248b0d2"
+    },
+    {
+      "path": "logs/earthwork/run_1/multiple_batches_shared_nodes_samples.csv",
+      "bytes": 7365,
+      "sha256": "381f0c4afd1a59080b4613dbaa64b28a491d3f469f397fd4cb54f21b8ee073c2"
+    },
+    {
+      "path": "logs/earthwork/run_1/multiple_batches_shared_nodes_trace.csv",
+      "bytes": 29585,
+      "sha256": "65f39fd8c6a41cba1897d2b7b992a9f359b221f04448f118df935f36e386d76c"
+    },
+    {
+      "path": "logs/earthwork/run_1/paper_taiwan_45_live_trace.csv",
+      "bytes": 58631,
+      "sha256": "731d23d9706aa855acd2fb4209491912bb34af020444b9c35207915d5e30a70a"
+    },
+    {
+      "path": "logs/earthwork/run_1/paper_taiwan_45_samples.csv",
+      "bytes": 47308,
+      "sha256": "6886d31dfe7d9900cec162e2698d4abd5e106fc35d1ce342488e51aeb378cb3e"
+    },
+    {
+      "path": "logs/earthwork/run_1/paper_taiwan_45_trace.csv",
+      "bytes": 30919,
+      "sha256": "7f2a60f76217ddb24303606254b1a293b322fde78d5b3a114993c330d397df43"
+    },
+    {
+      "path": "logs/earthwork/run_1/plane_both_30_live_trace.csv",
+      "bytes": 4311,
+      "sha256": "89b1639b968be00b3575b6970bf6b413367ff40f9b13cae302fa094b91dab815"
+    },
+    {
+      "path": "logs/earthwork/run_1/plane_both_30_samples.csv",
+      "bytes": 2407,
+      "sha256": "a7b754885c10b9694c0352869aaa3e523052e26ec984e2773d7b26e699127d50"
+    },
+    {
+      "path": "logs/earthwork/run_1/plane_both_30_trace.csv",
+      "bytes": 2593,
+      "sha256": "edf53f3c57f8b000136849b902276c000d6d609ec4f72793bc91f3292fda44ca"
+    },
+    {
+      "path": "logs/earthwork/run_1/plane_both_45_live_trace.csv",
+      "bytes": 4303,
+      "sha256": "41e18199a6b16c7c50dec9cb63fc9f29abcf1f4f34da6beccdbab9936a4957d2"
+    },
+    {
+      "path": "logs/earthwork/run_1/plane_both_45_samples.csv",
+      "bytes": 2368,
+      "sha256": "35d2dcf1f3729758728ac64d3b4a4389f044503cc62e5ec94c83d2766ec438f1"
+    },
+    {
+      "path": "logs/earthwork/run_1/plane_both_45_trace.csv",
+      "bytes": 2593,
+      "sha256": "edf53f3c57f8b000136849b902276c000d6d609ec4f72793bc91f3292fda44ca"
+    },
+    {
+      "path": "logs/earthwork/run_1/plane_both_60_live_trace.csv",
+      "bytes": 4311,
+      "sha256": "6ab18256062e4fcd7924a3736d835a2a4f0dd7ff70eb850a01e007046ae4e98e"
+    },
+    {
+      "path": "logs/earthwork/run_1/plane_both_60_samples.csv",
+      "bytes": 2406,
+      "sha256": "99d484453897bfc619e92f40f59cebde55015e7b17722411465930942408a2ce"
+    },
+    {
+      "path": "logs/earthwork/run_1/plane_both_60_trace.csv",
+      "bytes": 2593,
+      "sha256": "edf53f3c57f8b000136849b902276c000d6d609ec4f72793bc91f3292fda44ca"
+    },
+    {
+      "path": "logs/earthwork/run_1/results.json",
+      "bytes": 17726,
+      "sha256": "ea53b3729fa0f51a13c44edd09710f583d46214bca7eddc679228ae8c8ceff8d"
+    },
+    {
+      "path": "logs/earthwork/run_1/taiwan_30_live_trace.csv",
+      "bytes": 4568,
+      "sha256": "c714508d009771257ef9e63cba6068323fdcbe6b04d9d503b65b9977393124fa"
+    },
+    {
+      "path": "logs/earthwork/run_1/taiwan_30_samples.csv",
+      "bytes": 2482,
+      "sha256": "db7ce2c948cc939089c82da2ba703913f908385f56d93abebf23e930c1326496"
+    },
+    {
+      "path": "logs/earthwork/run_1/taiwan_30_trace.csv",
+      "bytes": 2593,
+      "sha256": "edf53f3c57f8b000136849b902276c000d6d609ec4f72793bc91f3292fda44ca"
+    },
+    {
+      "path": "logs/earthwork/run_1/taiwan_45_live_trace.csv",
+      "bytes": 4572,
+      "sha256": "b14266687078c802f47c95e9f4407e8a09c2169ab0c5fde03cf0ddd38abedea4"
+    },
+    {
+      "path": "logs/earthwork/run_1/taiwan_45_samples.csv",
+      "bytes": 2432,
+      "sha256": "ede66a9572595c7df7565849ee6fa83c3eba221d39985a35a9183d2b1e139e05"
+    },
+    {
+      "path": "logs/earthwork/run_1/taiwan_45_trace.csv",
+      "bytes": 2593,
+      "sha256": "edf53f3c57f8b000136849b902276c000d6d609ec4f72793bc91f3292fda44ca"
+    },
+    {
+      "path": "logs/earthwork/run_1/taiwan_60_live_trace.csv",
+      "bytes": 4572,
+      "sha256": "e4e1e6950c497b1f98159f9558d7c2a0bf24e70db9bb4d2c775a12c66bf46b6d"
+    },
+    {
+      "path": "logs/earthwork/run_1/taiwan_60_samples.csv",
+      "bytes": 2475,
+      "sha256": "b3e4756894cf06a1533e98b6331488162c3a59f8159befb6af63223dc1599cb7"
+    },
+    {
+      "path": "logs/earthwork/run_1/taiwan_60_trace.csv",
+      "bytes": 2593,
+      "sha256": "edf53f3c57f8b000136849b902276c000d6d609ec4f72793bc91f3292fda44ca"
+    },
+    {
+      "path": "logs/earthwork/run_2/concave_selected_cells_live_trace.csv",
+      "bytes": 12603,
+      "sha256": "544cd7636bba992c49fd924d4ab9df49a9d0c66aac0747e1f3e03456ff6834e2"
+    },
+    {
+      "path": "logs/earthwork/run_2/concave_selected_cells_samples.csv",
+      "bytes": 3597,
+      "sha256": "ee0ddb9969a1b1af5227825f8a6d66d2b05e01ba12cea7e673c917426cb41735"
+    },
+    {
+      "path": "logs/earthwork/run_2/concave_selected_cells_trace.csv",
+      "bytes": 7714,
+      "sha256": "058f4c759284b68fdcc504939d1ea749b95825f6049cfcecfa062f54ce477aa2"
+    },
+    {
+      "path": "logs/earthwork/run_2/flat_cut_30_live_trace.csv",
+      "bytes": 4020,
+      "sha256": "585eed326165c12324c938bc6ed20671124756991955a41d9beff7d56e895244"
+    },
+    {
+      "path": "logs/earthwork/run_2/flat_cut_30_samples.csv",
+      "bytes": 2225,
+      "sha256": "7801f6619c1e602a74c16c731fcf2497c440ade46430758a2f8c53693945236a"
+    },
+    {
+      "path": "logs/earthwork/run_2/flat_cut_30_trace.csv",
+      "bytes": 2593,
+      "sha256": "edf53f3c57f8b000136849b902276c000d6d609ec4f72793bc91f3292fda44ca"
+    },
+    {
+      "path": "logs/earthwork/run_2/flat_cut_45_live_trace.csv",
+      "bytes": 4012,
+      "sha256": "7d1bcd961f627b59a89b8c7342b641e536451e0bc7bdbc371e9ce0240211a587"
+    },
+    {
+      "path": "logs/earthwork/run_2/flat_cut_45_samples.csv",
+      "bytes": 2150,
+      "sha256": "d31514c1d2d57b79fcb815e1e0048e93eadd9b3253dff9f07dda347eb11eab5b"
+    },
+    {
+      "path": "logs/earthwork/run_2/flat_cut_45_trace.csv",
+      "bytes": 2593,
+      "sha256": "edf53f3c57f8b000136849b902276c000d6d609ec4f72793bc91f3292fda44ca"
+    },
+    {
+      "path": "logs/earthwork/run_2/flat_cut_60_live_trace.csv",
+      "bytes": 4020,
+      "sha256": "ef3335976502f3fe2fdcddbd5284dfd70756189c4588f4e64718eef7b5939f99"
+    },
+    {
+      "path": "logs/earthwork/run_2/flat_cut_60_samples.csv",
+      "bytes": 2101,
+      "sha256": "e33262c2200aacbff79bab61d01716a750f80695b509ec1ab06b40b346f35c9d"
+    },
+    {
+      "path": "logs/earthwork/run_2/flat_cut_60_trace.csv",
+      "bytes": 2593,
+      "sha256": "edf53f3c57f8b000136849b902276c000d6d609ec4f72793bc91f3292fda44ca"
+    },
+    {
+      "path": "logs/earthwork/run_2/flat_fill_30_live_trace.csv",
+      "bytes": 4022,
+      "sha256": "651bd1fac4cc855a7dbbc73aa2a03964e69f824d175f4538fb7b7b5f719bacbb"
+    },
+    {
+      "path": "logs/earthwork/run_2/flat_fill_30_samples.csv",
+      "bytes": 2213,
+      "sha256": "54dd97b7b7436311e6446bca9dee1316eebe0fc893fe4d37fc6ad5aca2183abc"
+    },
+    {
+      "path": "logs/earthwork/run_2/flat_fill_30_trace.csv",
+      "bytes": 2593,
+      "sha256": "edf53f3c57f8b000136849b902276c000d6d609ec4f72793bc91f3292fda44ca"
+    },
+    {
+      "path": "logs/earthwork/run_2/flat_fill_45_live_trace.csv",
+      "bytes": 4014,
+      "sha256": "0aeae23051a7ef4cfbaf0ffde26bc330c55ee3e0281153bcb31666cb89378997"
+    },
+    {
+      "path": "logs/earthwork/run_2/flat_fill_45_samples.csv",
+      "bytes": 2135,
+      "sha256": "ea1468bca46cbcb877acb1a8370c89784e30b91a55b7eb47ea904f717a1f9c12"
+    },
+    {
+      "path": "logs/earthwork/run_2/flat_fill_45_trace.csv",
+      "bytes": 2593,
+      "sha256": "edf53f3c57f8b000136849b902276c000d6d609ec4f72793bc91f3292fda44ca"
+    },
+    {
+      "path": "logs/earthwork/run_2/flat_fill_60_live_trace.csv",
+      "bytes": 4022,
+      "sha256": "c160f254a034bb7aec26eed24aef1c76ab4bfed560049205ed98a75aaa776fa9"
+    },
+    {
+      "path": "logs/earthwork/run_2/flat_fill_60_samples.csv",
+      "bytes": 2134,
+      "sha256": "88ab7710e1d21d84e5bb966c4e31e37af545893b08f2cba095f9b6b454d3c915"
+    },
+    {
+      "path": "logs/earthwork/run_2/flat_fill_60_trace.csv",
+      "bytes": 2593,
+      "sha256": "edf53f3c57f8b000136849b902276c000d6d609ec4f72793bc91f3292fda44ca"
+    },
+    {
+      "path": "logs/earthwork/run_2/infeasible_boundary_live_trace.csv",
+      "bytes": 4022,
+      "sha256": "89149e942a21e98c2adb3e991609637b04c63e52e56549f9403ef56c0b4f44e7"
+    },
+    {
+      "path": "logs/earthwork/run_2/infeasible_boundary_samples.csv",
+      "bytes": 2385,
+      "sha256": "9ae25572ad9645dd18f2e997e145d984814cf218492c2db08acdcd640e9f256e"
+    },
+    {
+      "path": "logs/earthwork/run_2/infeasible_boundary_trace.csv",
+      "bytes": 2593,
+      "sha256": "edf53f3c57f8b000136849b902276c000d6d609ec4f72793bc91f3292fda44ca"
+    },
+    {
+      "path": "logs/earthwork/run_2/multiple_batches_shared_nodes_live_trace.csv",
+      "bytes": 48194,
+      "sha256": "0e53505bd8e4d97ab1a84313dd65ea993e4582d0a1404aa4bbee632af248b0d2"
+    },
+    {
+      "path": "logs/earthwork/run_2/multiple_batches_shared_nodes_samples.csv",
+      "bytes": 7409,
+      "sha256": "a317afca34d4c2f0b20fa65255b328b71ce05dd4d99c04d22c086f9e5bcb3835"
+    },
+    {
+      "path": "logs/earthwork/run_2/multiple_batches_shared_nodes_trace.csv",
+      "bytes": 29585,
+      "sha256": "65f39fd8c6a41cba1897d2b7b992a9f359b221f04448f118df935f36e386d76c"
+    },
+    {
+      "path": "logs/earthwork/run_2/paper_taiwan_45_live_trace.csv",
+      "bytes": 58631,
+      "sha256": "731d23d9706aa855acd2fb4209491912bb34af020444b9c35207915d5e30a70a"
+    },
+    {
+      "path": "logs/earthwork/run_2/paper_taiwan_45_samples.csv",
+      "bytes": 47312,
+      "sha256": "58294b3b4bd914010234591135e2b7751238eb3946bbfdf0adec58e3aad2d9e4"
+    },
+    {
+      "path": "logs/earthwork/run_2/paper_taiwan_45_trace.csv",
+      "bytes": 30919,
+      "sha256": "7f2a60f76217ddb24303606254b1a293b322fde78d5b3a114993c330d397df43"
+    },
+    {
+      "path": "logs/earthwork/run_2/plane_both_30_live_trace.csv",
+      "bytes": 4311,
+      "sha256": "89b1639b968be00b3575b6970bf6b413367ff40f9b13cae302fa094b91dab815"
+    },
+    {
+      "path": "logs/earthwork/run_2/plane_both_30_samples.csv",
+      "bytes": 2407,
+      "sha256": "95c4c153f132ff62109f0768202bd6798a00e38893145cf3ebb101355e7c8daa"
+    },
+    {
+      "path": "logs/earthwork/run_2/plane_both_30_trace.csv",
+      "bytes": 2593,
+      "sha256": "edf53f3c57f8b000136849b902276c000d6d609ec4f72793bc91f3292fda44ca"
+    },
+    {
+      "path": "logs/earthwork/run_2/plane_both_45_live_trace.csv",
+      "bytes": 4303,
+      "sha256": "41e18199a6b16c7c50dec9cb63fc9f29abcf1f4f34da6beccdbab9936a4957d2"
+    },
+    {
+      "path": "logs/earthwork/run_2/plane_both_45_samples.csv",
+      "bytes": 2368,
+      "sha256": "ec5b1ae4242c0f23d210d6bdaad041de9170dba9f9bf1c542fde81c45543bcf4"
+    },
+    {
+      "path": "logs/earthwork/run_2/plane_both_45_trace.csv",
+      "bytes": 2593,
+      "sha256": "edf53f3c57f8b000136849b902276c000d6d609ec4f72793bc91f3292fda44ca"
+    },
+    {
+      "path": "logs/earthwork/run_2/plane_both_60_live_trace.csv",
+      "bytes": 4311,
+      "sha256": "6ab18256062e4fcd7924a3736d835a2a4f0dd7ff70eb850a01e007046ae4e98e"
+    },
+    {
+      "path": "logs/earthwork/run_2/plane_both_60_samples.csv",
+      "bytes": 2406,
+      "sha256": "9ec448118c3efe3d60b029c6ca2c859b6ec614d875cf6f9f39a83c056d3943f2"
+    },
+    {
+      "path": "logs/earthwork/run_2/plane_both_60_trace.csv",
+      "bytes": 2593,
+      "sha256": "edf53f3c57f8b000136849b902276c000d6d609ec4f72793bc91f3292fda44ca"
+    },
+    {
+      "path": "logs/earthwork/run_2/results.json",
+      "bytes": 17657,
+      "sha256": "ab065866a8bb7647abb50f97ba9388dc8a01a8011e68b9c9c6f56a5504ad582d"
+    },
+    {
+      "path": "logs/earthwork/run_2/taiwan_30_live_trace.csv",
+      "bytes": 4568,
+      "sha256": "c714508d009771257ef9e63cba6068323fdcbe6b04d9d503b65b9977393124fa"
+    },
+    {
+      "path": "logs/earthwork/run_2/taiwan_30_samples.csv",
+      "bytes": 2478,
+      "sha256": "2836b1326e59cafc799193ff11b14ae861a95cfd6a2dbb616ce9db28c2c7488f"
+    },
+    {
+      "path": "logs/earthwork/run_2/taiwan_30_trace.csv",
+      "bytes": 2593,
+      "sha256": "edf53f3c57f8b000136849b902276c000d6d609ec4f72793bc91f3292fda44ca"
+    },
+    {
+      "path": "logs/earthwork/run_2/taiwan_45_live_trace.csv",
+      "bytes": 4572,
+      "sha256": "b14266687078c802f47c95e9f4407e8a09c2169ab0c5fde03cf0ddd38abedea4"
+    },
+    {
+      "path": "logs/earthwork/run_2/taiwan_45_samples.csv",
+      "bytes": 2482,
+      "sha256": "27b6e8060eb25884055eb83ed78a47452c6405c2fb27ad2a0c150f0ebf88676c"
+    },
+    {
+      "path": "logs/earthwork/run_2/taiwan_45_trace.csv",
+      "bytes": 2593,
+      "sha256": "edf53f3c57f8b000136849b902276c000d6d609ec4f72793bc91f3292fda44ca"
+    },
+    {
+      "path": "logs/earthwork/run_2/taiwan_60_live_trace.csv",
+      "bytes": 4572,
+      "sha256": "e4e1e6950c497b1f98159f9558d7c2a0bf24e70db9bb4d2c775a12c66bf46b6d"
+    },
+    {
+      "path": "logs/earthwork/run_2/taiwan_60_samples.csv",
+      "bytes": 2479,
+      "sha256": "a7ba6f98b30223720481035d94e1325cdf965a38af8e932b5b2808a22714db9f"
+    },
+    {
+      "path": "logs/earthwork/run_2/taiwan_60_trace.csv",
+      "bytes": 2593,
+      "sha256": "edf53f3c57f8b000136849b902276c000d6d609ec4f72793bc91f3292fda44ca"
+    },
+    {
+      "path": "logs/earthwork/run_3/concave_selected_cells_live_trace.csv",
+      "bytes": 12603,
+      "sha256": "544cd7636bba992c49fd924d4ab9df49a9d0c66aac0747e1f3e03456ff6834e2"
+    },
+    {
+      "path": "logs/earthwork/run_3/concave_selected_cells_samples.csv",
+      "bytes": 3596,
+      "sha256": "57e63c99adc0a0dc4016e2f08628037e16e9bdfa21a42a36baf3692dd8dfbb44"
+    },
+    {
+      "path": "logs/earthwork/run_3/concave_selected_cells_trace.csv",
+      "bytes": 7714,
+      "sha256": "058f4c759284b68fdcc504939d1ea749b95825f6049cfcecfa062f54ce477aa2"
+    },
+    {
+      "path": "logs/earthwork/run_3/flat_cut_30_live_trace.csv",
+      "bytes": 4020,
+      "sha256": "585eed326165c12324c938bc6ed20671124756991955a41d9beff7d56e895244"
+    },
+    {
+      "path": "logs/earthwork/run_3/flat_cut_30_samples.csv",
+      "bytes": 2226,
+      "sha256": "96d9ccb98e57977da6b70eb7d1e14081564173ed235dec694309a6a512f63aa4"
+    },
+    {
+      "path": "logs/earthwork/run_3/flat_cut_30_trace.csv",
+      "bytes": 2593,
+      "sha256": "edf53f3c57f8b000136849b902276c000d6d609ec4f72793bc91f3292fda44ca"
+    },
+    {
+      "path": "logs/earthwork/run_3/flat_cut_45_live_trace.csv",
+      "bytes": 4012,
+      "sha256": "7d1bcd961f627b59a89b8c7342b641e536451e0bc7bdbc371e9ce0240211a587"
+    },
+    {
+      "path": "logs/earthwork/run_3/flat_cut_45_samples.csv",
+      "bytes": 2145,
+      "sha256": "ba05f3edc038a5de771e7a1c71b807921c3954face51b9236eae4a5d933404ec"
+    },
+    {
+      "path": "logs/earthwork/run_3/flat_cut_45_trace.csv",
+      "bytes": 2593,
+      "sha256": "edf53f3c57f8b000136849b902276c000d6d609ec4f72793bc91f3292fda44ca"
+    },
+    {
+      "path": "logs/earthwork/run_3/flat_cut_60_live_trace.csv",
+      "bytes": 4020,
+      "sha256": "ef3335976502f3fe2fdcddbd5284dfd70756189c4588f4e64718eef7b5939f99"
+    },
+    {
+      "path": "logs/earthwork/run_3/flat_cut_60_samples.csv",
+      "bytes": 2143,
+      "sha256": "ebfc430cf960da41be42831d18cf490d99f9681573fdac2072c9d1e8304091c4"
+    },
+    {
+      "path": "logs/earthwork/run_3/flat_cut_60_trace.csv",
+      "bytes": 2593,
+      "sha256": "edf53f3c57f8b000136849b902276c000d6d609ec4f72793bc91f3292fda44ca"
+    },
+    {
+      "path": "logs/earthwork/run_3/flat_fill_30_live_trace.csv",
+      "bytes": 4022,
+      "sha256": "651bd1fac4cc855a7dbbc73aa2a03964e69f824d175f4538fb7b7b5f719bacbb"
+    },
+    {
+      "path": "logs/earthwork/run_3/flat_fill_30_samples.csv",
+      "bytes": 2214,
+      "sha256": "23106cbf5600050d7f78998dde8f5cbc7cbd6ffe4ecc01634192cfb04ce54a43"
+    },
+    {
+      "path": "logs/earthwork/run_3/flat_fill_30_trace.csv",
+      "bytes": 2593,
+      "sha256": "edf53f3c57f8b000136849b902276c000d6d609ec4f72793bc91f3292fda44ca"
+    },
+    {
+      "path": "logs/earthwork/run_3/flat_fill_45_live_trace.csv",
+      "bytes": 4014,
+      "sha256": "0aeae23051a7ef4cfbaf0ffde26bc330c55ee3e0281153bcb31666cb89378997"
+    },
+    {
+      "path": "logs/earthwork/run_3/flat_fill_45_samples.csv",
+      "bytes": 2136,
+      "sha256": "f8b9c36a74adce375c59a64bcaf0e1e24689824fb9469d549f41e59af3cd93d8"
+    },
+    {
+      "path": "logs/earthwork/run_3/flat_fill_45_trace.csv",
+      "bytes": 2593,
+      "sha256": "edf53f3c57f8b000136849b902276c000d6d609ec4f72793bc91f3292fda44ca"
+    },
+    {
+      "path": "logs/earthwork/run_3/flat_fill_60_live_trace.csv",
+      "bytes": 4022,
+      "sha256": "c160f254a034bb7aec26eed24aef1c76ab4bfed560049205ed98a75aaa776fa9"
+    },
+    {
+      "path": "logs/earthwork/run_3/flat_fill_60_samples.csv",
+      "bytes": 2095,
+      "sha256": "e279bf03426f2d7d7f1a08fa1e7513a6ea297bfd1d81fed54a96edc6de7a4f03"
+    },
+    {
+      "path": "logs/earthwork/run_3/flat_fill_60_trace.csv",
+      "bytes": 2593,
+      "sha256": "edf53f3c57f8b000136849b902276c000d6d609ec4f72793bc91f3292fda44ca"
+    },
+    {
+      "path": "logs/earthwork/run_3/infeasible_boundary_live_trace.csv",
+      "bytes": 4022,
+      "sha256": "89149e942a21e98c2adb3e991609637b04c63e52e56549f9403ef56c0b4f44e7"
+    },
+    {
+      "path": "logs/earthwork/run_3/infeasible_boundary_samples.csv",
+      "bytes": 2389,
+      "sha256": "e83ab08f2ad062c172d7289de5f84671c29c6daaf9aaeb567b23814ca1950e68"
+    },
+    {
+      "path": "logs/earthwork/run_3/infeasible_boundary_trace.csv",
+      "bytes": 2593,
+      "sha256": "edf53f3c57f8b000136849b902276c000d6d609ec4f72793bc91f3292fda44ca"
+    },
+    {
+      "path": "logs/earthwork/run_3/multiple_batches_shared_nodes_live_trace.csv",
+      "bytes": 48194,
+      "sha256": "0e53505bd8e4d97ab1a84313dd65ea993e4582d0a1404aa4bbee632af248b0d2"
+    },
+    {
+      "path": "logs/earthwork/run_3/multiple_batches_shared_nodes_samples.csv",
+      "bytes": 7417,
+      "sha256": "82e362e1e57f47cfe44549d116f769d9b3d510d1389a6f4c6c191615d3016d59"
+    },
+    {
+      "path": "logs/earthwork/run_3/multiple_batches_shared_nodes_trace.csv",
+      "bytes": 29585,
+      "sha256": "65f39fd8c6a41cba1897d2b7b992a9f359b221f04448f118df935f36e386d76c"
+    },
+    {
+      "path": "logs/earthwork/run_3/paper_taiwan_45_live_trace.csv",
+      "bytes": 58631,
+      "sha256": "731d23d9706aa855acd2fb4209491912bb34af020444b9c35207915d5e30a70a"
+    },
+    {
+      "path": "logs/earthwork/run_3/paper_taiwan_45_samples.csv",
+      "bytes": 47326,
+      "sha256": "e97098b832bc159533340e5ebd7ee951603a12330935926c55d420eabb29469c"
+    },
+    {
+      "path": "logs/earthwork/run_3/paper_taiwan_45_trace.csv",
+      "bytes": 30919,
+      "sha256": "7f2a60f76217ddb24303606254b1a293b322fde78d5b3a114993c330d397df43"
+    },
+    {
+      "path": "logs/earthwork/run_3/plane_both_30_live_trace.csv",
+      "bytes": 4311,
+      "sha256": "89b1639b968be00b3575b6970bf6b413367ff40f9b13cae302fa094b91dab815"
+    },
+    {
+      "path": "logs/earthwork/run_3/plane_both_30_samples.csv",
+      "bytes": 2409,
+      "sha256": "cde96b2f74f0a1efbbe818467781cae990cfd709c8674c1993850745e6f8371d"
+    },
+    {
+      "path": "logs/earthwork/run_3/plane_both_30_trace.csv",
+      "bytes": 2593,
+      "sha256": "edf53f3c57f8b000136849b902276c000d6d609ec4f72793bc91f3292fda44ca"
+    },
+    {
+      "path": "logs/earthwork/run_3/plane_both_45_live_trace.csv",
+      "bytes": 4303,
+      "sha256": "41e18199a6b16c7c50dec9cb63fc9f29abcf1f4f34da6beccdbab9936a4957d2"
+    },
+    {
+      "path": "logs/earthwork/run_3/plane_both_45_samples.csv",
+      "bytes": 2358,
+      "sha256": "7e806cda71974d98ceccf079bad35a00e7318169acf7fca2a2b9ba07d2c2f8ba"
+    },
+    {
+      "path": "logs/earthwork/run_3/plane_both_45_trace.csv",
+      "bytes": 2593,
+      "sha256": "edf53f3c57f8b000136849b902276c000d6d609ec4f72793bc91f3292fda44ca"
+    },
+    {
+      "path": "logs/earthwork/run_3/plane_both_60_live_trace.csv",
+      "bytes": 4311,
+      "sha256": "6ab18256062e4fcd7924a3736d835a2a4f0dd7ff70eb850a01e007046ae4e98e"
+    },
+    {
+      "path": "logs/earthwork/run_3/plane_both_60_samples.csv",
+      "bytes": 2407,
+      "sha256": "81637b051e4f21bdbbc640c4edf0635732e94d0e051aa5506714abe1bb6a1294"
+    },
+    {
+      "path": "logs/earthwork/run_3/plane_both_60_trace.csv",
+      "bytes": 2593,
+      "sha256": "edf53f3c57f8b000136849b902276c000d6d609ec4f72793bc91f3292fda44ca"
+    },
+    {
+      "path": "logs/earthwork/run_3/results.json",
+      "bytes": 17700,
+      "sha256": "59ecfe7809d9dc3756f5180da459ca28405276f922697c7d4ee3e79a0794d3a9"
+    },
+    {
+      "path": "logs/earthwork/run_3/taiwan_30_live_trace.csv",
+      "bytes": 4568,
+      "sha256": "c714508d009771257ef9e63cba6068323fdcbe6b04d9d503b65b9977393124fa"
+    },
+    {
+      "path": "logs/earthwork/run_3/taiwan_30_samples.csv",
+      "bytes": 2483,
+      "sha256": "e539d2f46f98d6f359bf54980b76e5d10e67e48125eb1e4f846c017cf3d77ab4"
+    },
+    {
+      "path": "logs/earthwork/run_3/taiwan_30_trace.csv",
+      "bytes": 2593,
+      "sha256": "edf53f3c57f8b000136849b902276c000d6d609ec4f72793bc91f3292fda44ca"
+    },
+    {
+      "path": "logs/earthwork/run_3/taiwan_45_live_trace.csv",
+      "bytes": 4572,
+      "sha256": "b14266687078c802f47c95e9f4407e8a09c2169ab0c5fde03cf0ddd38abedea4"
+    },
+    {
+      "path": "logs/earthwork/run_3/taiwan_45_samples.csv",
+      "bytes": 2438,
+      "sha256": "eed45b915406454ea0864994aa81b35ab5ffcd7a581b27f6c234f43de78ac408"
+    },
+    {
+      "path": "logs/earthwork/run_3/taiwan_45_trace.csv",
+      "bytes": 2593,
+      "sha256": "edf53f3c57f8b000136849b902276c000d6d609ec4f72793bc91f3292fda44ca"
+    },
+    {
+      "path": "logs/earthwork/run_3/taiwan_60_live_trace.csv",
+      "bytes": 4572,
+      "sha256": "e4e1e6950c497b1f98159f9558d7c2a0bf24e70db9bb4d2c775a12c66bf46b6d"
+    },
+    {
+      "path": "logs/earthwork/run_3/taiwan_60_samples.csv",
+      "bytes": 2480,
+      "sha256": "554570f26e4b05e774ce50d56caafae90fe39392d85d58e939de29139c5f07e6"
+    },
+    {
+      "path": "logs/earthwork/run_3/taiwan_60_trace.csv",
+      "bytes": 2593,
+      "sha256": "edf53f3c57f8b000136849b902276c000d6d609ec4f72793bc91f3292fda44ca"
+    },
+    {
+      "path": "logs/earthwork/run_4/concave_selected_cells_live_trace.csv",
+      "bytes": 12603,
+      "sha256": "544cd7636bba992c49fd924d4ab9df49a9d0c66aac0747e1f3e03456ff6834e2"
+    },
+    {
+      "path": "logs/earthwork/run_4/concave_selected_cells_samples.csv",
+      "bytes": 3600,
+      "sha256": "e20b101d1640077e8fe63db2c5736696ee7f58292f59c2b1ab045afce0995a6f"
+    },
+    {
+      "path": "logs/earthwork/run_4/concave_selected_cells_trace.csv",
+      "bytes": 7714,
+      "sha256": "058f4c759284b68fdcc504939d1ea749b95825f6049cfcecfa062f54ce477aa2"
+    },
+    {
+      "path": "logs/earthwork/run_4/flat_cut_30_live_trace.csv",
+      "bytes": 4020,
+      "sha256": "585eed326165c12324c938bc6ed20671124756991955a41d9beff7d56e895244"
+    },
+    {
+      "path": "logs/earthwork/run_4/flat_cut_30_samples.csv",
+      "bytes": 2226,
+      "sha256": "20754bad57a1d4876229926d323f00ffe7747a35df080055aa7ecafc59f330c5"
+    },
+    {
+      "path": "logs/earthwork/run_4/flat_cut_30_trace.csv",
+      "bytes": 2593,
+      "sha256": "edf53f3c57f8b000136849b902276c000d6d609ec4f72793bc91f3292fda44ca"
+    },
+    {
+      "path": "logs/earthwork/run_4/flat_cut_45_live_trace.csv",
+      "bytes": 4012,
+      "sha256": "7d1bcd961f627b59a89b8c7342b641e536451e0bc7bdbc371e9ce0240211a587"
+    },
+    {
+      "path": "logs/earthwork/run_4/flat_cut_45_samples.csv",
+      "bytes": 2148,
+      "sha256": "67ba37af2c03c3aef34ce20b3bb2ac4dce1fe4a942094b19255bd9cfb9473538"
+    },
+    {
+      "path": "logs/earthwork/run_4/flat_cut_45_trace.csv",
+      "bytes": 2593,
+      "sha256": "edf53f3c57f8b000136849b902276c000d6d609ec4f72793bc91f3292fda44ca"
+    },
+    {
+      "path": "logs/earthwork/run_4/flat_cut_60_live_trace.csv",
+      "bytes": 4020,
+      "sha256": "ef3335976502f3fe2fdcddbd5284dfd70756189c4588f4e64718eef7b5939f99"
+    },
+    {
+      "path": "logs/earthwork/run_4/flat_cut_60_samples.csv",
+      "bytes": 2144,
+      "sha256": "d87542ea2d9728f379d06f1cbd8916ad757e2a00a995cc389f03753daa517756"
+    },
+    {
+      "path": "logs/earthwork/run_4/flat_cut_60_trace.csv",
+      "bytes": 2593,
+      "sha256": "edf53f3c57f8b000136849b902276c000d6d609ec4f72793bc91f3292fda44ca"
+    },
+    {
+      "path": "logs/earthwork/run_4/flat_fill_30_live_trace.csv",
+      "bytes": 4022,
+      "sha256": "651bd1fac4cc855a7dbbc73aa2a03964e69f824d175f4538fb7b7b5f719bacbb"
+    },
+    {
+      "path": "logs/earthwork/run_4/flat_fill_30_samples.csv",
+      "bytes": 2217,
+      "sha256": "7ac5c6e6d1b16a34c8fcbe0489c43b9f04228ec89d9f1c23fe08d47cdf495b67"
+    },
+    {
+      "path": "logs/earthwork/run_4/flat_fill_30_trace.csv",
+      "bytes": 2593,
+      "sha256": "edf53f3c57f8b000136849b902276c000d6d609ec4f72793bc91f3292fda44ca"
+    },
+    {
+      "path": "logs/earthwork/run_4/flat_fill_45_live_trace.csv",
+      "bytes": 4014,
+      "sha256": "0aeae23051a7ef4cfbaf0ffde26bc330c55ee3e0281153bcb31666cb89378997"
+    },
+    {
+      "path": "logs/earthwork/run_4/flat_fill_45_samples.csv",
+      "bytes": 2097,
+      "sha256": "9d774c0167a2bcadba0806191a42f66bd88cf2c42dc10eb18db2da3894d39df0"
+    },
+    {
+      "path": "logs/earthwork/run_4/flat_fill_45_trace.csv",
+      "bytes": 2593,
+      "sha256": "edf53f3c57f8b000136849b902276c000d6d609ec4f72793bc91f3292fda44ca"
+    },
+    {
+      "path": "logs/earthwork/run_4/flat_fill_60_live_trace.csv",
+      "bytes": 4022,
+      "sha256": "c160f254a034bb7aec26eed24aef1c76ab4bfed560049205ed98a75aaa776fa9"
+    },
+    {
+      "path": "logs/earthwork/run_4/flat_fill_60_samples.csv",
+      "bytes": 2133,
+      "sha256": "ae3e713dadb1f7f2911d5c32ac729d0371eb057eb88296e99988daa2d17ce549"
+    },
+    {
+      "path": "logs/earthwork/run_4/flat_fill_60_trace.csv",
+      "bytes": 2593,
+      "sha256": "edf53f3c57f8b000136849b902276c000d6d609ec4f72793bc91f3292fda44ca"
+    },
+    {
+      "path": "logs/earthwork/run_4/infeasible_boundary_live_trace.csv",
+      "bytes": 4022,
+      "sha256": "89149e942a21e98c2adb3e991609637b04c63e52e56549f9403ef56c0b4f44e7"
+    },
+    {
+      "path": "logs/earthwork/run_4/infeasible_boundary_samples.csv",
+      "bytes": 2386,
+      "sha256": "01fa5b390a5e5fadfd788fe24cea8a97b72c2572ba3e9bea49440f6a6fe05812"
+    },
+    {
+      "path": "logs/earthwork/run_4/infeasible_boundary_trace.csv",
+      "bytes": 2593,
+      "sha256": "edf53f3c57f8b000136849b902276c000d6d609ec4f72793bc91f3292fda44ca"
+    },
+    {
+      "path": "logs/earthwork/run_4/multiple_batches_shared_nodes_live_trace.csv",
+      "bytes": 48194,
+      "sha256": "0e53505bd8e4d97ab1a84313dd65ea993e4582d0a1404aa4bbee632af248b0d2"
+    },
+    {
+      "path": "logs/earthwork/run_4/multiple_batches_shared_nodes_samples.csv",
+      "bytes": 7401,
+      "sha256": "0c77ef691575ad57e2c7949df55159bec02a769e1f5968b44ad53306c2b891e5"
+    },
+    {
+      "path": "logs/earthwork/run_4/multiple_batches_shared_nodes_trace.csv",
+      "bytes": 29585,
+      "sha256": "65f39fd8c6a41cba1897d2b7b992a9f359b221f04448f118df935f36e386d76c"
+    },
+    {
+      "path": "logs/earthwork/run_4/paper_taiwan_45_live_trace.csv",
+      "bytes": 58631,
+      "sha256": "731d23d9706aa855acd2fb4209491912bb34af020444b9c35207915d5e30a70a"
+    },
+    {
+      "path": "logs/earthwork/run_4/paper_taiwan_45_samples.csv",
+      "bytes": 47340,
+      "sha256": "a9477b900d21e6a3f2521db28a8aaeaa06e464052d705cee847ef0e3feea08e9"
+    },
+    {
+      "path": "logs/earthwork/run_4/paper_taiwan_45_trace.csv",
+      "bytes": 30919,
+      "sha256": "7f2a60f76217ddb24303606254b1a293b322fde78d5b3a114993c330d397df43"
+    },
+    {
+      "path": "logs/earthwork/run_4/plane_both_30_live_trace.csv",
+      "bytes": 4311,
+      "sha256": "89b1639b968be00b3575b6970bf6b413367ff40f9b13cae302fa094b91dab815"
+    },
+    {
+      "path": "logs/earthwork/run_4/plane_both_30_samples.csv",
+      "bytes": 2409,
+      "sha256": "150d462071bd7a78acb9bf1acf36585df02dd218c97c0fb028fb858e0124f0d3"
+    },
+    {
+      "path": "logs/earthwork/run_4/plane_both_30_trace.csv",
+      "bytes": 2593,
+      "sha256": "edf53f3c57f8b000136849b902276c000d6d609ec4f72793bc91f3292fda44ca"
+    },
+    {
+      "path": "logs/earthwork/run_4/plane_both_45_live_trace.csv",
+      "bytes": 4303,
+      "sha256": "41e18199a6b16c7c50dec9cb63fc9f29abcf1f4f34da6beccdbab9936a4957d2"
+    },
+    {
+      "path": "logs/earthwork/run_4/plane_both_45_samples.csv",
+      "bytes": 2365,
+      "sha256": "adc8c585f62f8e36344d333c372310727e92e84dbe0812b624d70d585873d8a4"
+    },
+    {
+      "path": "logs/earthwork/run_4/plane_both_45_trace.csv",
+      "bytes": 2593,
+      "sha256": "edf53f3c57f8b000136849b902276c000d6d609ec4f72793bc91f3292fda44ca"
+    },
+    {
+      "path": "logs/earthwork/run_4/plane_both_60_live_trace.csv",
+      "bytes": 4311,
+      "sha256": "6ab18256062e4fcd7924a3736d835a2a4f0dd7ff70eb850a01e007046ae4e98e"
+    },
+    {
+      "path": "logs/earthwork/run_4/plane_both_60_samples.csv",
+      "bytes": 2408,
+      "sha256": "7edf542c814309e9a7568cfdccca7ecb4829a91563e499f81fbce8293da5ad52"
+    },
+    {
+      "path": "logs/earthwork/run_4/plane_both_60_trace.csv",
+      "bytes": 2593,
+      "sha256": "edf53f3c57f8b000136849b902276c000d6d609ec4f72793bc91f3292fda44ca"
+    },
+    {
+      "path": "logs/earthwork/run_4/results.json",
+      "bytes": 17698,
+      "sha256": "9f91a524f865a7a8737428852648eabcdefb64ed75751f8ffbf878cf744edcec"
+    },
+    {
+      "path": "logs/earthwork/run_4/taiwan_30_live_trace.csv",
+      "bytes": 4568,
+      "sha256": "c714508d009771257ef9e63cba6068323fdcbe6b04d9d503b65b9977393124fa"
+    },
+    {
+      "path": "logs/earthwork/run_4/taiwan_30_samples.csv",
+      "bytes": 2478,
+      "sha256": "51bc7d7bd038fec46be24b4a3e60af58df58eac0c92da0242c068620567528fa"
+    },
+    {
+      "path": "logs/earthwork/run_4/taiwan_30_trace.csv",
+      "bytes": 2593,
+      "sha256": "edf53f3c57f8b000136849b902276c000d6d609ec4f72793bc91f3292fda44ca"
+    },
+    {
+      "path": "logs/earthwork/run_4/taiwan_45_live_trace.csv",
+      "bytes": 4572,
+      "sha256": "b14266687078c802f47c95e9f4407e8a09c2169ab0c5fde03cf0ddd38abedea4"
+    },
+    {
+      "path": "logs/earthwork/run_4/taiwan_45_samples.csv",
+      "bytes": 2474,
+      "sha256": "845ed3d6d45526cbfe38fdc76b57a692d7ae96b423d8729e6ae726bda0433a51"
+    },
+    {
+      "path": "logs/earthwork/run_4/taiwan_45_trace.csv",
+      "bytes": 2593,
+      "sha256": "edf53f3c57f8b000136849b902276c000d6d609ec4f72793bc91f3292fda44ca"
+    },
+    {
+      "path": "logs/earthwork/run_4/taiwan_60_live_trace.csv",
+      "bytes": 4572,
+      "sha256": "e4e1e6950c497b1f98159f9558d7c2a0bf24e70db9bb4d2c775a12c66bf46b6d"
+    },
+    {
+      "path": "logs/earthwork/run_4/taiwan_60_samples.csv",
+      "bytes": 2481,
+      "sha256": "d54f4606565853c0f745654c718cf703951f6d2bcda458c1b7539571b29fcd06"
+    },
+    {
+      "path": "logs/earthwork/run_4/taiwan_60_trace.csv",
+      "bytes": 2593,
+      "sha256": "edf53f3c57f8b000136849b902276c000d6d609ec4f72793bc91f3292fda44ca"
+    },
+    {
+      "path": "logs/earthwork/summary.json",
+      "bytes": 72263,
+      "sha256": "6485e76d824347fd3bc1dacd1eb84ec8525553471084bbfb1476ced08141baa3"
+    },
+    {
+      "path": "logs/sightline/independent_trace_audit.json",
+      "bytes": 106745,
+      "sha256": "14ba2d661accd7a8237e8ba0182720d56cd51d7fabd1857951ee83447b4cdb6b"
+    },
+    {
+      "path": "logs/sightline/provenance.json",
+      "bytes": 3819,
+      "sha256": "7c528a95a356e6401115b2cec7bc735a8c108ea38f46a09b52953e2b07f2c878"
+    },
+    {
+      "path": "logs/sightline/run_1/downhill_zero_angle_samples.csv",
+      "bytes": 2128,
+      "sha256": "a22775e6e3187e6a9783771f82aed641009e7cc043c48f1c42dac1b33f610fff"
+    },
+    {
+      "path": "logs/sightline/run_1/downhill_zero_angle_trace.csv",
+      "bytes": 787,
+      "sha256": "c1ebe2707b6811e720a1115c379ff15d0c43f8517418deda5f77cb56420b641e"
+    },
+    {
+      "path": "logs/sightline/run_1/exact_slot_boundary_samples.csv",
+      "bytes": 3386,
+      "sha256": "11c119e4f9bdb4095169fc1af95c78851e8b37382bec6efaa6b0b15b1880d2a2"
+    },
+    {
+      "path": "logs/sightline/run_1/exact_slot_boundary_trace.csv",
+      "bytes": 787,
+      "sha256": "c1ebe2707b6811e720a1115c379ff15d0c43f8517418deda5f77cb56420b641e"
+    },
+    {
+      "path": "logs/sightline/run_1/flat_negative_angle_samples.csv",
+      "bytes": 1675,
+      "sha256": "697368b67f368d57183d0271b78c2012d3840dd461ab7bb18afaf0f2baf8a9b3"
+    },
+    {
+      "path": "logs/sightline/run_1/flat_negative_angle_trace.csv",
+      "bytes": 787,
+      "sha256": "c1ebe2707b6811e720a1115c379ff15d0c43f8517418deda5f77cb56420b641e"
+    },
+    {
+      "path": "logs/sightline/run_1/flat_positive_angle_samples.csv",
+      "bytes": 2146,
+      "sha256": "8a7080886ae3a9a3ddb2d825ae4d12e450996a54cec1d0aea4739152b5e03489"
+    },
+    {
+      "path": "logs/sightline/run_1/flat_positive_angle_trace.csv",
+      "bytes": 787,
+      "sha256": "c1ebe2707b6811e720a1115c379ff15d0c43f8517418deda5f77cb56420b641e"
+    },
+    {
+      "path": "logs/sightline/run_1/flat_zero_angle_samples.csv",
+      "bytes": 1620,
+      "sha256": "f84403d48484b277384b779e574f0387390accd8f4cfe3134c2f0661a09ea5af"
+    },
+    {
+      "path": "logs/sightline/run_1/flat_zero_angle_trace.csv",
+      "bytes": 787,
+      "sha256": "c1ebe2707b6811e720a1115c379ff15d0c43f8517418deda5f77cb56420b641e"
+    },
+    {
+      "path": "logs/sightline/run_1/minimum_two_samples_samples.csv",
+      "bytes": 510,
+      "sha256": "c95b6b4a8c6d0b0f1b4aaf579a12f46e04e6533c6247ed6cdddb887d801e3874"
+    },
+    {
+      "path": "logs/sightline/run_1/minimum_two_samples_trace.csv",
+      "bytes": 787,
+      "sha256": "c1ebe2707b6811e720a1115c379ff15d0c43f8517418deda5f77cb56420b641e"
+    },
+    {
+      "path": "logs/sightline/run_1/near_zero_negative_samples.csv",
+      "bytes": 1746,
+      "sha256": "c36da07af0686082f7244b899dbd873ace3927ae327ea6b74b8c1bcc8191b7bb"
+    },
+    {
+      "path": "logs/sightline/run_1/near_zero_negative_trace.csv",
+      "bytes": 787,
+      "sha256": "c1ebe2707b6811e720a1115c379ff15d0c43f8517418deda5f77cb56420b641e"
+    },
+    {
+      "path": "logs/sightline/run_1/near_zero_positive_samples.csv",
+      "bytes": 2293,
+      "sha256": "267c0dae179f5a82ca9be5b50da53d869a7d1cf5a2de5787504a001ce9893338"
+    },
+    {
+      "path": "logs/sightline/run_1/near_zero_positive_trace.csv",
+      "bytes": 787,
+      "sha256": "c1ebe2707b6811e720a1115c379ff15d0c43f8517418deda5f77cb56420b641e"
+    },
+    {
+      "path": "logs/sightline/run_1/one_past_slots_samples.csv",
+      "bytes": 3607,
+      "sha256": "10a60a49fe968af238080892e0b216b73ffbd17aaca1f086477a078ccbdda594"
+    },
+    {
+      "path": "logs/sightline/run_1/one_past_slots_trace.csv",
+      "bytes": 1555,
+      "sha256": "1bb661ace528f9be866984bb3e88a7239590feb784ca0eb75fd6bb6791dfba22"
+    },
+    {
+      "path": "logs/sightline/run_1/results.json",
+      "bytes": 7123,
+      "sha256": "3129527c18d2245ecfa9d68d04464b49393f8aed78a6d9c29352579032172a91"
+    },
+    {
+      "path": "logs/sightline/run_1/taiwan_demo_10_samples.csv",
+      "bytes": 2438,
+      "sha256": "243a8f4450b5280c16ab788ebd12f8bb5d8eadc8d178c5ab1d98f402844e9809"
+    },
+    {
+      "path": "logs/sightline/run_1/taiwan_demo_10_trace.csv",
+      "bytes": 787,
+      "sha256": "c1ebe2707b6811e720a1115c379ff15d0c43f8517418deda5f77cb56420b641e"
+    },
+    {
+      "path": "logs/sightline/run_1/three_batches_tail_9_samples.csv",
+      "bytes": 8572,
+      "sha256": "261217775cd909bd52e33e516d9395e7b5831b9d2b851aaafddec767351cf271"
+    },
+    {
+      "path": "logs/sightline/run_1/three_batches_tail_9_trace.csv",
+      "bytes": 2349,
+      "sha256": "3315058de84388af74002d66e228890b912c8f97dfb3302d1eaead590b0ec4ac"
+    },
+    {
+      "path": "logs/sightline/run_1/uphill_above_plane_samples.csv",
+      "bytes": 1991,
+      "sha256": "6f90b9d78f58c70ee923ab81da01a66e85c5417565efdb637274571faa914084"
+    },
+    {
+      "path": "logs/sightline/run_1/uphill_above_plane_trace.csv",
+      "bytes": 787,
+      "sha256": "c1ebe2707b6811e720a1115c379ff15d0c43f8517418deda5f77cb56420b641e"
+    },
+    {
+      "path": "logs/sightline/run_2/downhill_zero_angle_samples.csv",
+      "bytes": 2128,
+      "sha256": "1466712168b82ec3006d5907ab471e8b2b9f843a7137d3cc45b46655730f8f24"
+    },
+    {
+      "path": "logs/sightline/run_2/downhill_zero_angle_trace.csv",
+      "bytes": 787,
+      "sha256": "c1ebe2707b6811e720a1115c379ff15d0c43f8517418deda5f77cb56420b641e"
+    },
+    {
+      "path": "logs/sightline/run_2/exact_slot_boundary_samples.csv",
+      "bytes": 3344,
+      "sha256": "c2f91f5fe27186cec9ecfdf8be90672d9bc96db6dfc54a2a868b892831058bc1"
+    },
+    {
+      "path": "logs/sightline/run_2/exact_slot_boundary_trace.csv",
+      "bytes": 787,
+      "sha256": "c1ebe2707b6811e720a1115c379ff15d0c43f8517418deda5f77cb56420b641e"
+    },
+    {
+      "path": "logs/sightline/run_2/flat_negative_angle_samples.csv",
+      "bytes": 1670,
+      "sha256": "5732e3a226b5ddbeadc7d0a138998a0b627b42ce3dd42b1639bcf164fca33e52"
+    },
+    {
+      "path": "logs/sightline/run_2/flat_negative_angle_trace.csv",
+      "bytes": 787,
+      "sha256": "c1ebe2707b6811e720a1115c379ff15d0c43f8517418deda5f77cb56420b641e"
+    },
+    {
+      "path": "logs/sightline/run_2/flat_positive_angle_samples.csv",
+      "bytes": 2148,
+      "sha256": "07e943ecfd8bdd486293827e239cdfd75eec18c36d6470f1a8638214a4c7c803"
+    },
+    {
+      "path": "logs/sightline/run_2/flat_positive_angle_trace.csv",
+      "bytes": 787,
+      "sha256": "c1ebe2707b6811e720a1115c379ff15d0c43f8517418deda5f77cb56420b641e"
+    },
+    {
+      "path": "logs/sightline/run_2/flat_zero_angle_samples.csv",
+      "bytes": 1535,
+      "sha256": "50c33066786ea61e4702e0159b03d13ac562f960db40e1606a80fd9f1db4db43"
+    },
+    {
+      "path": "logs/sightline/run_2/flat_zero_angle_trace.csv",
+      "bytes": 787,
+      "sha256": "c1ebe2707b6811e720a1115c379ff15d0c43f8517418deda5f77cb56420b641e"
+    },
+    {
+      "path": "logs/sightline/run_2/minimum_two_samples_samples.csv",
+      "bytes": 510,
+      "sha256": "8ee9e44674a5b2f09eea9172cd98121e4798849ce435851efbfc56a460d564cd"
+    },
+    {
+      "path": "logs/sightline/run_2/minimum_two_samples_trace.csv",
+      "bytes": 787,
+      "sha256": "c1ebe2707b6811e720a1115c379ff15d0c43f8517418deda5f77cb56420b641e"
+    },
+    {
+      "path": "logs/sightline/run_2/near_zero_negative_samples.csv",
+      "bytes": 1747,
+      "sha256": "195f472aac55916cd4b44613aa65f7fdb4f3815c9ee99982f446c3c44ceed8f7"
+    },
+    {
+      "path": "logs/sightline/run_2/near_zero_negative_trace.csv",
+      "bytes": 787,
+      "sha256": "c1ebe2707b6811e720a1115c379ff15d0c43f8517418deda5f77cb56420b641e"
+    },
+    {
+      "path": "logs/sightline/run_2/near_zero_positive_samples.csv",
+      "bytes": 2294,
+      "sha256": "1ad27f0549f1e0f0fc02aea5fc93c5abb94585e79f1bc1c8a605680f32c86678"
+    },
+    {
+      "path": "logs/sightline/run_2/near_zero_positive_trace.csv",
+      "bytes": 787,
+      "sha256": "c1ebe2707b6811e720a1115c379ff15d0c43f8517418deda5f77cb56420b641e"
+    },
+    {
+      "path": "logs/sightline/run_2/one_past_slots_samples.csv",
+      "bytes": 3555,
+      "sha256": "813491e86af5222103cf488a62a2a7d4b5af401791922403741ac607f8c82476"
+    },
+    {
+      "path": "logs/sightline/run_2/one_past_slots_trace.csv",
+      "bytes": 1555,
+      "sha256": "1bb661ace528f9be866984bb3e88a7239590feb784ca0eb75fd6bb6791dfba22"
+    },
+    {
+      "path": "logs/sightline/run_2/results.json",
+      "bytes": 7071,
+      "sha256": "130e6fdc1601bfe117afcb65879cf278fa964db95c4f0cae086427d2265bb463"
+    },
+    {
+      "path": "logs/sightline/run_2/taiwan_demo_10_samples.csv",
+      "bytes": 2417,
+      "sha256": "64a7ecf01cd947b2900991ff1226b0e2b8c2dcb07d3d53fb2a78834081322f8a"
+    },
+    {
+      "path": "logs/sightline/run_2/taiwan_demo_10_trace.csv",
+      "bytes": 787,
+      "sha256": "c1ebe2707b6811e720a1115c379ff15d0c43f8517418deda5f77cb56420b641e"
+    },
+    {
+      "path": "logs/sightline/run_2/three_batches_tail_9_samples.csv",
+      "bytes": 8533,
+      "sha256": "1082c5786b903c39e3eec4319763e7b9b91bf7619393e02321dd66d70127afc5"
+    },
+    {
+      "path": "logs/sightline/run_2/three_batches_tail_9_trace.csv",
+      "bytes": 2349,
+      "sha256": "3315058de84388af74002d66e228890b912c8f97dfb3302d1eaead590b0ec4ac"
+    },
+    {
+      "path": "logs/sightline/run_2/uphill_above_plane_samples.csv",
+      "bytes": 1993,
+      "sha256": "563b00075849bd1e6879e6a3719aa27a8157bd9644708dcd284759b7cc23322d"
+    },
+    {
+      "path": "logs/sightline/run_2/uphill_above_plane_trace.csv",
+      "bytes": 787,
+      "sha256": "c1ebe2707b6811e720a1115c379ff15d0c43f8517418deda5f77cb56420b641e"
+    },
+    {
+      "path": "logs/sightline/run_3/downhill_zero_angle_samples.csv",
+      "bytes": 2125,
+      "sha256": "44c46c5779910e7d96b65343779aa7fb65d460ecc700f990f032cb4f11d91120"
+    },
+    {
+      "path": "logs/sightline/run_3/downhill_zero_angle_trace.csv",
+      "bytes": 787,
+      "sha256": "c1ebe2707b6811e720a1115c379ff15d0c43f8517418deda5f77cb56420b641e"
+    },
+    {
+      "path": "logs/sightline/run_3/exact_slot_boundary_samples.csv",
+      "bytes": 3389,
+      "sha256": "d2a24e47191bca5d31145d865a13d070d931bf1d7c8a0babc805f89caafd8df0"
+    },
+    {
+      "path": "logs/sightline/run_3/exact_slot_boundary_trace.csv",
+      "bytes": 787,
+      "sha256": "c1ebe2707b6811e720a1115c379ff15d0c43f8517418deda5f77cb56420b641e"
+    },
+    {
+      "path": "logs/sightline/run_3/flat_negative_angle_samples.csv",
+      "bytes": 1672,
+      "sha256": "860789cd5c16148e02b0c273eca62fcfe7919548dc8419428dc87951bac5004c"
+    },
+    {
+      "path": "logs/sightline/run_3/flat_negative_angle_trace.csv",
+      "bytes": 787,
+      "sha256": "c1ebe2707b6811e720a1115c379ff15d0c43f8517418deda5f77cb56420b641e"
+    },
+    {
+      "path": "logs/sightline/run_3/flat_positive_angle_samples.csv",
+      "bytes": 2149,
+      "sha256": "be2976e745defed9fe5d444f19d5cacd814cb2b81da68d5a6f06db6cf5735b1c"
+    },
+    {
+      "path": "logs/sightline/run_3/flat_positive_angle_trace.csv",
+      "bytes": 787,
+      "sha256": "c1ebe2707b6811e720a1115c379ff15d0c43f8517418deda5f77cb56420b641e"
+    },
+    {
+      "path": "logs/sightline/run_3/flat_zero_angle_samples.csv",
+      "bytes": 1579,
+      "sha256": "cc9ef5da48e4cebb1125640888b71c5431ea2883d0614ae2a6b8fcc1f077a5b5"
+    },
+    {
+      "path": "logs/sightline/run_3/flat_zero_angle_trace.csv",
+      "bytes": 787,
+      "sha256": "c1ebe2707b6811e720a1115c379ff15d0c43f8517418deda5f77cb56420b641e"
+    },
+    {
+      "path": "logs/sightline/run_3/minimum_two_samples_samples.csv",
+      "bytes": 551,
+      "sha256": "054e0ff5fe5b81b024d06005c0b00d34cba5ef73fe42c19064109b8eab3b6a5e"
+    },
+    {
+      "path": "logs/sightline/run_3/minimum_two_samples_trace.csv",
+      "bytes": 787,
+      "sha256": "c1ebe2707b6811e720a1115c379ff15d0c43f8517418deda5f77cb56420b641e"
+    },
+    {
+      "path": "logs/sightline/run_3/near_zero_negative_samples.csv",
+      "bytes": 1747,
+      "sha256": "6734f28f71494d69b2feaa34f138f7c08fe33648921226df5e01075b2ab7b469"
+    },
+    {
+      "path": "logs/sightline/run_3/near_zero_negative_trace.csv",
+      "bytes": 787,
+      "sha256": "c1ebe2707b6811e720a1115c379ff15d0c43f8517418deda5f77cb56420b641e"
+    },
+    {
+      "path": "logs/sightline/run_3/near_zero_positive_samples.csv",
+      "bytes": 2296,
+      "sha256": "67a23eaace6ac4dad3e25f793ff93d366fdb9d0ab179575fec3fe983f032d12d"
+    },
+    {
+      "path": "logs/sightline/run_3/near_zero_positive_trace.csv",
+      "bytes": 787,
+      "sha256": "c1ebe2707b6811e720a1115c379ff15d0c43f8517418deda5f77cb56420b641e"
+    },
+    {
+      "path": "logs/sightline/run_3/one_past_slots_samples.csv",
+      "bytes": 3577,
+      "sha256": "a0eca3f03e6aaa0c062a9225bcda007bef23d38e1fa5807e013ca66855a5e8fe"
+    },
+    {
+      "path": "logs/sightline/run_3/one_past_slots_trace.csv",
+      "bytes": 1555,
+      "sha256": "1bb661ace528f9be866984bb3e88a7239590feb784ca0eb75fd6bb6791dfba22"
+    },
+    {
+      "path": "logs/sightline/run_3/results.json",
+      "bytes": 7154,
+      "sha256": "313532c799001f97dc6e35529a6c6972eebea328e54eaa536dfffe144ec3b8f7"
+    },
+    {
+      "path": "logs/sightline/run_3/taiwan_demo_10_samples.csv",
+      "bytes": 2413,
+      "sha256": "b7a4d0d1bc30ac4c489ea3f5c0c8d7b170a3c22aaea05106c6574eff187b243a"
+    },
+    {
+      "path": "logs/sightline/run_3/taiwan_demo_10_trace.csv",
+      "bytes": 787,
+      "sha256": "c1ebe2707b6811e720a1115c379ff15d0c43f8517418deda5f77cb56420b641e"
+    },
+    {
+      "path": "logs/sightline/run_3/three_batches_tail_9_samples.csv",
+      "bytes": 8494,
+      "sha256": "5faa2ac707cf778871664cc77a9a0ab7ea1a397babc6e5eac422bc3261330610"
+    },
+    {
+      "path": "logs/sightline/run_3/three_batches_tail_9_trace.csv",
+      "bytes": 2349,
+      "sha256": "3315058de84388af74002d66e228890b912c8f97dfb3302d1eaead590b0ec4ac"
+    },
+    {
+      "path": "logs/sightline/run_3/uphill_above_plane_samples.csv",
+      "bytes": 1991,
+      "sha256": "7ee3652d18e850f8b3747269f5ab176275f9710cfea15abbc881926969afeea1"
+    },
+    {
+      "path": "logs/sightline/run_3/uphill_above_plane_trace.csv",
+      "bytes": 787,
+      "sha256": "c1ebe2707b6811e720a1115c379ff15d0c43f8517418deda5f77cb56420b641e"
+    },
+    {
+      "path": "logs/sightline/run_4/downhill_zero_angle_samples.csv",
+      "bytes": 2129,
+      "sha256": "97991c3e64c618c62516ea16855d82c40b0abdfab7f94fb119124ad6f25e5542"
+    },
+    {
+      "path": "logs/sightline/run_4/downhill_zero_angle_trace.csv",
+      "bytes": 787,
+      "sha256": "c1ebe2707b6811e720a1115c379ff15d0c43f8517418deda5f77cb56420b641e"
+    },
+    {
+      "path": "logs/sightline/run_4/exact_slot_boundary_samples.csv",
+      "bytes": 3304,
+      "sha256": "f3cd89243a34c5a06f5740af951b6472a2acc465259d69bcc19c234927b15865"
+    },
+    {
+      "path": "logs/sightline/run_4/exact_slot_boundary_trace.csv",
+      "bytes": 787,
+      "sha256": "c1ebe2707b6811e720a1115c379ff15d0c43f8517418deda5f77cb56420b641e"
+    },
+    {
+      "path": "logs/sightline/run_4/flat_negative_angle_samples.csv",
+      "bytes": 1675,
+      "sha256": "212194d1dfed7db94b46efae8592331de0734fada2cc50929d10bc26ee462ded"
+    },
+    {
+      "path": "logs/sightline/run_4/flat_negative_angle_trace.csv",
+      "bytes": 787,
+      "sha256": "c1ebe2707b6811e720a1115c379ff15d0c43f8517418deda5f77cb56420b641e"
+    },
+    {
+      "path": "logs/sightline/run_4/flat_positive_angle_samples.csv",
+      "bytes": 2149,
+      "sha256": "cff79a197d29971cebaa37d1d599e749f225266a52ebcd32a49f74602a47baf8"
+    },
+    {
+      "path": "logs/sightline/run_4/flat_positive_angle_trace.csv",
+      "bytes": 787,
+      "sha256": "c1ebe2707b6811e720a1115c379ff15d0c43f8517418deda5f77cb56420b641e"
+    },
+    {
+      "path": "logs/sightline/run_4/flat_zero_angle_samples.csv",
+      "bytes": 1534,
+      "sha256": "b3518e06271e4c5dd7898b1409cf74b8a5a8e0524137b89600b08c72da84a1ea"
+    },
+    {
+      "path": "logs/sightline/run_4/flat_zero_angle_trace.csv",
+      "bytes": 787,
+      "sha256": "c1ebe2707b6811e720a1115c379ff15d0c43f8517418deda5f77cb56420b641e"
+    },
+    {
+      "path": "logs/sightline/run_4/minimum_two_samples_samples.csv",
+      "bytes": 510,
+      "sha256": "f66fd9c25885c46506e903baf0583b3193f83cb73273ea2958322d7a02a6bc66"
+    },
+    {
+      "path": "logs/sightline/run_4/minimum_two_samples_trace.csv",
+      "bytes": 787,
+      "sha256": "c1ebe2707b6811e720a1115c379ff15d0c43f8517418deda5f77cb56420b641e"
+    },
+    {
+      "path": "logs/sightline/run_4/near_zero_negative_samples.csv",
+      "bytes": 1742,
+      "sha256": "299a3ff92d151532b8146d7e770d3ed7032e93e5dad08d746f2bf7b7a512359c"
+    },
+    {
+      "path": "logs/sightline/run_4/near_zero_negative_trace.csv",
+      "bytes": 787,
+      "sha256": "c1ebe2707b6811e720a1115c379ff15d0c43f8517418deda5f77cb56420b641e"
+    },
+    {
+      "path": "logs/sightline/run_4/near_zero_positive_samples.csv",
+      "bytes": 2295,
+      "sha256": "0d2c56b1dd800489c60f4bde0c76c43bb9cf07676c45709eaa73682141a6c4c5"
+    },
+    {
+      "path": "logs/sightline/run_4/near_zero_positive_trace.csv",
+      "bytes": 787,
+      "sha256": "c1ebe2707b6811e720a1115c379ff15d0c43f8517418deda5f77cb56420b641e"
+    },
+    {
+      "path": "logs/sightline/run_4/one_past_slots_samples.csv",
+      "bytes": 3557,
+      "sha256": "e90f0f6216de39f6fd93e7937c28363d9c4214cbd07b2315c3d31243fc5871c5"
+    },
+    {
+      "path": "logs/sightline/run_4/one_past_slots_trace.csv",
+      "bytes": 1555,
+      "sha256": "1bb661ace528f9be866984bb3e88a7239590feb784ca0eb75fd6bb6791dfba22"
+    },
+    {
+      "path": "logs/sightline/run_4/results.json",
+      "bytes": 7078,
+      "sha256": "0ccdb4d07d79ee980b736d01ef36a9b39ac9436a094e0888eeb8e7f406e592e7"
+    },
+    {
+      "path": "logs/sightline/run_4/taiwan_demo_10_samples.csv",
+      "bytes": 2394,
+      "sha256": "8eba6b5035fc31c082d04734a9ed908b3b72c8f1c7381541c7370836352683db"
+    },
+    {
+      "path": "logs/sightline/run_4/taiwan_demo_10_trace.csv",
+      "bytes": 787,
+      "sha256": "c1ebe2707b6811e720a1115c379ff15d0c43f8517418deda5f77cb56420b641e"
+    },
+    {
+      "path": "logs/sightline/run_4/three_batches_tail_9_samples.csv",
+      "bytes": 8530,
+      "sha256": "46e66bcc106f2d9854ec51e6ef7c62d04e77a0f5c1dd83566401a3a534cb3e51"
+    },
+    {
+      "path": "logs/sightline/run_4/three_batches_tail_9_trace.csv",
+      "bytes": 2349,
+      "sha256": "3315058de84388af74002d66e228890b912c8f97dfb3302d1eaead590b0ec4ac"
+    },
+    {
+      "path": "logs/sightline/run_4/uphill_above_plane_samples.csv",
+      "bytes": 1992,
+      "sha256": "8ff936c054908d27df2a3f248eae0db2a3cf1a20acef6a40f85e57da88cb78a2"
+    },
+    {
+      "path": "logs/sightline/run_4/uphill_above_plane_trace.csv",
+      "bytes": 787,
+      "sha256": "c1ebe2707b6811e720a1115c379ff15d0c43f8517418deda5f77cb56420b641e"
+    },
+    {
+      "path": "logs/sightline/summary.json",
+      "bytes": 29129,
+      "sha256": "29880ac6bc1edb5f5f32a61851c11670d165fd5fb541bc6715b65c6efce1bd82"
+    },
+    {
+      "path": "README.md",
+      "bytes": 7565,
+      "sha256": "85bb29f9be53183e77b48b9e080350ed66fb53526b53389d89eabd02d77bab59"
+    },
+    {
+      "path": "sightline_validation.cpp",
+      "bytes": 22208,
+      "sha256": "c57597d6e268d519cabfb8e62b3c7a6f6ad14c4514683f4b78af50cc9c2800e5"
+    },
+    {
+      "path": "source/CMakeLists.txt",
+      "bytes": 6097,
+      "sha256": "674b9e39642e9de89a2de24f23dde5e0b0010e4271f6a10c8cd33c0d6e423397"
+    },
+    {
+      "path": "source/example/bootstrap_validation.cpp",
+      "bytes": 1081,
+      "sha256": "a2f85350deaa74bca07b5496d2151595601126fac6c7c6d03a7f8669a5d03c36"
+    },
+    {
+      "path": "source/example/ckks_encode_probe.cpp",
+      "bytes": 3585,
+      "sha256": "cfafe5cd8145422cc3a11f7d6c753f208812774593346f37f25270ecef3de425"
+    },
+    {
+      "path": "source/example/ckks_honest_probe.cpp",
+      "bytes": 5320,
+      "sha256": "345c72b429673ce334f1eda39ac16ff45fe001f9f036506dc2673bf36b0c3306"
+    },
+    {
+      "path": "source/example/ckks_precision_probe.cpp",
+      "bytes": 7281,
+      "sha256": "2619b0691c704b7095f7f1fe327de0813574497fd74613e534ad25dc21fa6cb3"
+    },
+    {
+      "path": "source/example/ckks_stage_probe.cpp",
+      "bytes": 11813,
+      "sha256": "5f2c724a09bea136b59d87431e98965ff98ec1d9fccfa583832ba93ac79a7214"
+    },
+    {
+      "path": "source/example/convert_neh_to_validation_tdb.cpp",
+      "bytes": 4031,
+      "sha256": "410a40744c4390f285dc0f4dd78a5b9a550b7d8a86e718a6672ec6870b296314"
+    },
+    {
+      "path": "source/example/demo.cpp",
+      "bytes": 7236,
+      "sha256": "4fb4303a26b7a482dd543e6fdc29a5a68c243ebf77b5014b27a3628a64f76dd3"
+    },
+    {
+      "path": "source/example/experiments_validation.cpp",
+      "bytes": 6726,
+      "sha256": "79bc2ee16c3555d9e7f85569d804e493b89ed2bf24f801220ce912401b4546f4"
+    },
+    {
+      "path": "source/example/make_validation_tdb.cpp",
+      "bytes": 523,
+      "sha256": "a092876be6a5143584349bce3e7e57d10d72ddbc94a79401ac24318e7356fddb"
+    },
+    {
+      "path": "source/example/manifest_validation.cpp",
+      "bytes": 1183,
+      "sha256": "c5652a0252219a67ca624707a92043424c43153fa02283647416e9061c9640bb"
+    },
+    {
+      "path": "source/example/openfhe_official_ckks.cpp",
+      "bytes": 11143,
+      "sha256": "d736335f378037a2a37aaa975225d5fa524b54e3b3919fff16cb7a12d21861c7"
+    },
+    {
+      "path": "source/example/packed_store_validation.cpp",
+      "bytes": 3739,
+      "sha256": "7ba3a8934e9808df9f7a21b99956ba4a1fc7d5e68c5521b4fdf58030e3b19832"
+    },
+    {
+      "path": "source/example/plain_baseline.cpp",
+      "bytes": 2528,
+      "sha256": "6e03541e7bb857b82c13405ced4c97ca47971b0042815f01b6811f4076fb3600"
+    },
+    {
+      "path": "source/example/slope_grid_validation.cpp",
+      "bytes": 4175,
+      "sha256": "9416fa96f5997c4102c1b3c9caa51925e9248ed0edb5e0ed677938bfd000fafa"
+    },
+    {
+      "path": "source/example/synthetic_validation.cpp",
+      "bytes": 15688,
+      "sha256": "b6318b44ec30e506127b17f64b5b057167123d7670836ad0b5fb827a96d1abec"
+    },
+    {
+      "path": "source/include/openfhe_dtm/Analysis.hpp",
+      "bytes": 8610,
+      "sha256": "f75bb04fab89b8cdfc09fd1126a83d050b1da16eaf728af2fa8012d08d8bbbd1"
+    },
+    {
+      "path": "source/include/openfhe_dtm/DtmProvider.hpp",
+      "bytes": 2556,
+      "sha256": "fa7611c0731c52b2045b518ad9fe2d9964e1fbc98528b60ce43f23fa061d0c5d"
+    },
+    {
+      "path": "source/include/openfhe_dtm/EncryptedDem.hpp",
+      "bytes": 2061,
+      "sha256": "082e79dd16153e198a56b12621a6a73126ccebd127906f9ef7cbc83e76d30995"
+    },
+    {
+      "path": "source/include/openfhe_dtm/HeBackend.hpp",
+      "bytes": 2610,
+      "sha256": "8208d88eee0aab07b79f367afe2cfa0199d058f680070b06f636745377a48ed5"
+    },
+    {
+      "path": "source/include/openfhe_dtm/OpenFheBackend.hpp",
+      "bytes": 2444,
+      "sha256": "7bd29ba6691833805ca537888dc8926127ebcea5a04c7a835b13c0eac4ca4cdf"
+    },
+    {
+      "path": "source/include/openfhe_dtm/RunOptions.hpp",
+      "bytes": 2562,
+      "sha256": "f3fb4dce0f3b3dd4e0982818c31a5dcd5c199102db7c7a70d112b0a0226f5388"
+    },
+    {
+      "path": "source/include/openfhe_dtm/SlopeGrid.hpp",
+      "bytes": 2958,
+      "sha256": "9eb19b29f85c17f847cfe49162da4782ea971b06db75d1dbab24883fae7b3af9"
+    },
+    {
+      "path": "source/include/openfhe_dtm/TdbDataset.hpp",
+      "bytes": 1595,
+      "sha256": "6806cef874dd5b58eeac1c803c385989ca5cb48441274262dcb3273f4692c246"
+    },
+    {
+      "path": "source/src/Analysis.cpp",
+      "bytes": 17528,
+      "sha256": "f87a4d025eb6325ad064b963f9ed4aab340d464127ea2777ec0fd51e175726b5"
+    },
+    {
+      "path": "source/src/dem/EncryptedDem.cpp",
+      "bytes": 5834,
+      "sha256": "7208677530e05afd64d2b122316e8d9deac17b0a27e75ce7a90cf1c6d192421b"
+    },
+    {
+      "path": "source/src/DtmProvider.cpp",
+      "bytes": 7775,
+      "sha256": "08e503ba077e1532244eca0fa07399118bc4765ad53cf40067d9139f02be1c1a"
+    },
+    {
+      "path": "source/src/earthwork/Excavation.cpp",
+      "bytes": 23527,
+      "sha256": "53471f3aae923df9362a2f64651bfdbb9e41abdba83588813ba2eb8e7af20f38"
+    },
+    {
+      "path": "source/src/elevation/Elevation.cpp",
+      "bytes": 5927,
+      "sha256": "11d4b0ad08118aee7c315d41a424dc3d9b434b6802c9edd2e7ca14e9359a4a64"
+    },
+    {
+      "path": "source/src/OpenFheBackend.cpp",
+      "bytes": 20579,
+      "sha256": "150b04a2ffb341ea580d7a389b9fe9fa22b8d53a1fff96132d734fd7b77de56d"
+    },
+    {
+      "path": "source/src/slope/SlopeGrid.cpp",
+      "bytes": 15861,
+      "sha256": "bb3c0c18d7789657524ffb2b4e3e9f54bf3ad02c9367c4e177398596a68cb846"
+    },
+    {
+      "path": "source/src/TdbDataset.cpp",
+      "bytes": 12373,
+      "sha256": "fa5a8a9081b5aee7d4fd3e692a1369d18f4ef1a7227b2925b327e02f698d4862"
+    },
+    {
+      "path": "source_manifest.json",
+      "bytes": 3442,
+      "sha256": "69b0974ba78163c2e8b397ae1f19294b5f4140c40b5f8c4197ec89cdf44d5965"
+    },
+    {
+      "path": "verify_sightline_trace.py",
+      "bytes": 12798,
+      "sha256": "a1f23e5f8628fe5da39d09307f904f4b21dfe76094ca28f3467da7ecb055961b"
+    }
+  ]
+}

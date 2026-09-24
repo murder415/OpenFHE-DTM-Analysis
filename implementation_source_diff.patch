@@ -1,0 +1,440 @@
+--- original/CMakeLists.txt
++++ source/CMakeLists.txt
+@@ -12,6 +12,7 @@
+     src/OpenFheBackend.cpp
+     src/TdbDataset.cpp
+     src/elevation/Elevation.cpp
++    src/earthwork/Excavation.cpp
+     src/dem/EncryptedDem.cpp
+     src/slope/SlopeGrid.cpp
+ )
+--- original/example/synthetic_validation.cpp
++++ source/example/synthetic_validation.cpp
+@@ -238,11 +238,18 @@
+ 
+         const SightSurfaceResult sight = terrain.sightSurface(
+             SightSurfaceQuery{dtm.pointFromMeters(0.0, 0.0), dtm.pointFromMeters(90.0, 55.0), 12.0, 90.0, 10.0});
+-        require(sight.buildable_height_m.size() == sight.ground_m.size(),
++        require(sight.buildable_height_m.size() == sight.points.size(),
+                 "sight-surface result vectors should align");
+         require(sight.buildable_height_m.size() > 5, "sight-surface should sample the line");
+-        require(sight.ground_m.back() != sight.ground_m.front(),
+-                "sight-surface should read terrain along the line, not just the base point");
++        require(sight.ground_m.empty() && sight.regulation_plane_m.empty(),
++                "sight-surface must not expose separately decrypted ground or plane");
++        const double sight_base = dtm.elevationAt(sight.points.front());
++        for (std::size_t i = 0; i < sight.points.size(); ++i) {
++            const double reference = std::max(0.0, sight_base + sight.distances_m[i] *
++                std::tan(12.0 * 3.14159265358979323846 / 180.0) - dtm.elevationAt(sight.points[i]));
++            require(std::abs(sight.buildable_height_m[i] - reference) < 1e-6,
++                    "sight-surface must match an independent terrain reference");
++        }
+ 
+         const Route earthwork_area = {
+             dtm.pointFromMeters(10.0, 10.0),
+--- original/example/demo.cpp
++++ source/example/demo.cpp
+@@ -95,10 +95,8 @@
+                   << " min=" << *range.first << " max=" << *range.second << " m\n";
+     }
+     std::cout << "Sight-surface samples: " << sight.buildable_height_m.size()
+-              << " ground[first/last]=" << sight.ground_m.front() << "/"
+-              << sight.ground_m.back() << " plane[first/last]="
+-              << sight.regulation_plane_m.front() << "/"
+-              << sight.regulation_plane_m.back() << " buildable[first/last]="
++              << " (only final height differences are decrypted)"
++              << " buildable[first/last]="
+               << sight.buildable_height_m.front() << "/"
+               << sight.buildable_height_m.back() << " m\n";
+     std::cout << "Earthwork samples: " << earthwork.sample_count
+--- original/src/Analysis.cpp
++++ source/src/Analysis.cpp
+@@ -214,37 +214,78 @@
+     return result;
+ }
+ 
++SightSurfaceEncryptedResult TerrainAnalysis::sightSurfaceEncrypted(const SightSurfaceQuery& query) const {
++    if (!std::isfinite(query.max_distance_m) || query.max_distance_m <= 0.0) {
++        throw std::invalid_argument("SightSurfaceQuery::max_distance_m must be finite and positive");
++    }
++    if (!std::isfinite(query.sample_interval_m) || query.sample_interval_m <= 0.0) {
++        throw std::invalid_argument("SightSurfaceQuery::sample_interval_m must be finite and positive");
++    }
++    if (!std::isfinite(query.angle_degrees) || query.angle_degrees <= -90.0 ||
++        query.angle_degrees >= 90.0) {
++        throw std::invalid_argument("SightSurfaceQuery::angle_degrees must be strictly between -90 and 90");
++    }
++    if (!std::isfinite(query.base.lon) || !std::isfinite(query.base.lat) ||
++        !std::isfinite(query.direction.lon) || !std::isfinite(query.direction.lat)) {
++        throw std::invalid_argument("SightSurfaceQuery coordinates must be finite");
++    }
++    // sightLine uses this same clamped interval and adds the base endpoint.
++    // Check the floating-point step count before its conversion to size_t.
++    const double steps = std::ceil(query.max_distance_m / std::max(1.0, query.sample_interval_m));
++    if (!std::isfinite(steps) || steps >= static_cast<double>(Route{}.max_size())) {
++        throw std::length_error("SightSurfaceQuery requests too many samples");
++    }
++    const std::size_t slots = he_.slotCount();
++    if (slots == 0) {
++        throw std::invalid_argument("sightSurface requires nonzero slotCount");
++    }
++
++    SightSurfaceEncryptedResult result;
++    result.points = sightLine(query);
++    for (const auto& point : result.points) {
++        if (!std::isfinite(point.lon) || !std::isfinite(point.lat)) {
++            throw std::invalid_argument("SightSurfaceQuery produced non-finite sample coordinates");
++        }
++    }
++    result.distances_m = cumulativeDistances(result.points);
++    const double tan_theta = std::tan(toRad(query.angle_degrees));
++
++    for (std::size_t begin = 0; begin < result.points.size();) {
++        const std::size_t count = std::min(slots, result.points.size() - begin);
++        const Route route_batch(result.points.begin() + begin,
++                                result.points.begin() + begin + count);
++        const Route base_batch(count, query.base);
++        std::vector<double> negative_correction(count);
++        for (std::size_t i = 0; i < count; ++i) {
++            negative_correction[i] = -result.distances_m[begin + i] * tan_theta;
++            if (!std::isfinite(negative_correction[i])) {
++                throw std::invalid_argument("SightSurfaceQuery produced a non-finite plane correction");
++            }
++        }
++        const CipherVector ground_ct = elevationEncrypted(route_batch);
++        const CipherVector base_ct = elevationEncrypted(base_batch);
++        // base + d*tan(theta), expressed using the backend's existing subPlain.
++        const CipherVector plane_ct = he_.subPlain(base_ct, he_.encode(negative_correction));
++        result.batches.push_back({begin, count, he_.sub(plane_ct, ground_ct)});
++        begin += count;
++    }
++    return result;
++}
++
+ SightSurfaceResult TerrainAnalysis::sightSurface(const SightSurfaceQuery& query) const {
+-    if (query.max_distance_m <= 0.0) {
+-        throw std::invalid_argument("SightSurfaceQuery::max_distance_m must be positive");
+-    }
+-
+-    Route route = sightLine(query);
+-    const std::size_t samples = route.size();
+-    std::vector<double> plane(samples, 0.0);
++    SightSurfaceEncryptedResult encrypted = sightSurfaceEncrypted(query);
+     SightSurfaceResult result;
+-    result.points = route;
+-    result.distances_m = cumulativeDistances(route);
+-    result.ground_m.resize(samples);
+-    result.regulation_plane_m.resize(samples);
+-    result.buildable_height_m.resize(samples);
+-
+-    const double base_ground = elevation(Route{query.base}).elevations_m.front();
+-    const ElevationResult ground_profile = elevation(route);
+-    const double tan_theta = std::tan(toRad(query.angle_degrees));
+-
+-    for (std::size_t i = 0; i < samples; ++i) {
+-        const double d = result.distances_m[i];
+-        result.ground_m[i] = ground_profile.elevations_m[i];
+-        plane[i] = base_ground + d * tan_theta;
+-        result.regulation_plane_m[i] = plane[i];
+-    }
+-
+-    const CipherVector ground_ct = he_.encrypt(he_.encode(result.ground_m));
+-    const CipherVector plane_ct = he_.encrypt(he_.encode(plane));
+-    const PlainVector h = he_.decrypt(he_.sub(plane_ct, ground_ct));
+-    for (std::size_t i = 0; i < samples; ++i) {
+-        result.buildable_height_m[i] = std::max(0.0, h.values[i]);
++    result.points = std::move(encrypted.points);
++    result.distances_m = std::move(encrypted.distances_m);
++    result.buildable_height_m.resize(result.points.size());
++    for (const auto& batch : encrypted.batches) {
++        const PlainVector h = he_.decrypt(batch.height_difference);
++        if (h.values.size() < batch.sample_count) {
++            throw std::runtime_error("sightSurface decryption returned too few slots");
++        }
++        for (std::size_t i = 0; i < batch.sample_count; ++i) {
++            result.buildable_height_m[batch.begin + i] = std::max(0.0, h.values[i]);
++        }
+     }
+     return result;
+ }
+--- original/include/openfhe_dtm/Analysis.hpp
++++ source/include/openfhe_dtm/Analysis.hpp
+@@ -4,6 +4,9 @@
+ #include "openfhe_dtm/HeBackend.hpp"
+ 
+ #include <cstddef>
++#include <array>
++#include <limits>
++#include <string>
+ #include <vector>
+ 
+ namespace openfhe_dtm {
+@@ -56,10 +59,25 @@
+ 
+ struct SightSurfaceResult {
+     std::vector<double> distances_m;
++    // Intentionally empty: the final-result-only path does not decrypt the
++    // intermediate ground elevations or regulation plane.
+     std::vector<double> ground_m;
+     std::vector<double> regulation_plane_m;
+     std::vector<double> buildable_height_m;
+     std::vector<GeoPoint> points;
++};
++
++struct SightSurfaceCipherBatch {
++    std::size_t begin = 0;
++    std::size_t sample_count = 0;
++    // Signed regulation-plane minus ground height, before final max(0, h).
++    CipherVector height_difference;
++};
++
++struct SightSurfaceEncryptedResult {
++    std::vector<double> distances_m;
++    std::vector<GeoPoint> points;
++    std::vector<SightSurfaceCipherBatch> batches;
+ };
+ 
+ struct EarthworkQuery {
+@@ -88,17 +106,112 @@
+     double net_volume_abs_error_m3 = 0.0;  // |encrypted - plaintext|
+ };
+ 
++// Boundary-envelope earthwork, separate from the preserved planar earthwork()
++// baseline above. Coordinates, the polygon ring, grid and angle are public.
++struct EarthworkSlopeQuery {
++    Route polygon;
++    // Both are explicit caller inputs. NaN defaults reject omitted values.
++    double design_height_m = std::numeric_limits<double>::quiet_NaN();
++    double slope_angle_degrees = std::numeric_limits<double>::quiet_NaN();
++    double sample_interval_m = 5.0;
++    // Zero selects sample_interval_m; otherwise a finite positive value.
++    double boundary_interval_m = 0.0;
++    // Height thresholds in metres: area classification and envelope diagnostics.
++    // These defaults are numerical choices, not terrain-accuracy guarantees.
++    double area_threshold_m = 1e-6;
++    double envelope_tolerance_m = 1e-6;
++    std::size_t max_grid_cells = 1000000;
++    std::size_t max_boundary_points = 4096;
++    std::size_t max_candidate_ciphertexts = 100000;
++};
++
++struct EarthworkSlopeGeometry {
++    GeoPoint origin;
++    double grid_min_east_m = 0.0;
++    double grid_min_north_m = 0.0;
++    double grid_dx_m = 0.0;
++    double grid_dy_m = 0.0;
++    std::size_t grid_columns = 0;
++    std::size_t grid_rows = 0;
++    // Center-inside cells contribute area/4 at each vertex; shared vertices
++    // accumulate weights. Boundary cells are not clipped to the polygon.
++    Route points;
++    std::vector<double> point_weights_m2;
++    std::vector<std::array<std::size_t, 4>> cells;
++    Route boundary_points;
++    double integration_area_m2 = 0.0;
++};
++
++struct EarthworkSlopeCipherBatch {
++    std::size_t begin = 0;
++    std::size_t sample_count = 0;
++    // Target order: geometry.points, followed by geometry.boundary_points.
++    // Boundary-only diagnostic targets use grid_dx_m*grid_dy_m/4 as a positive
++    // numerical scale (removed at final comparison), and are never
++    // included in volume/area sums. Padding is zero and ignored on decryption.
++    CipherVector target_minus_ground;
++    std::vector<CipherVector> upper_candidates;
++    std::vector<CipherVector> lower_candidates;
++};
++
++struct EarthworkSlopeEncryptedResult {
++    EarthworkSlopeGeometry geometry;
++    double area_threshold_m = 1e-6;
++    double envelope_tolerance_m = 1e-6;
++    std::vector<EarthworkSlopeCipherBatch> batches;
++};
++
++struct EarthworkSlopeResult {
++    EarthworkSlopeGeometry geometry;
++    bool envelope_valid = false;
++    std::string status;
++    std::size_t infeasible_point_count = 0;
++    std::size_t infeasible_boundary_point_count = 0;
++    std::size_t infeasible_cell_count = 0;
++    double max_envelope_gap_m = 0.0;
++    // NaN when the boundary envelope is inconsistent beyond its tolerance.
++    double cut_volume_m3 = std::numeric_limits<double>::quiet_NaN();
++    double fill_volume_m3 = std::numeric_limits<double>::quiet_NaN();
++    double net_volume_m3 = std::numeric_limits<double>::quiet_NaN(); // fill - cut
++    double absolute_moved_volume_m3 = std::numeric_limits<double>::quiet_NaN();
++    double cut_area_m2 = std::numeric_limits<double>::quiet_NaN();
++    double fill_area_m2 = std::numeric_limits<double>::quiet_NaN();
++    double unchanged_area_m2 = std::numeric_limits<double>::quiet_NaN();
++    // Owner-side diagnostics only; derived per-point values are not safe to
++    // release merely because the original elevation was not decrypted directly.
++    std::vector<double> point_height_changes_m;
++};
++
+ class TerrainAnalysis {
+ public:
+     TerrainAnalysis(const IDtmProvider& dtm, const IHeBackend& he);
+ 
+     std::vector<double> plainElevation(const Route& route) const;
++    // InterpEnc: one nonempty batch of at most he.slotCount() points.
++    // Four encrypted corner arrays are weighted by plaintext bilinear weights;
++    // the result stays encrypted. No decryption is performed here.
++    CipherVector elevationEncrypted(const Route& route) const;
++    // Standalone elevation query: decrypts the interpolated result once per batch.
+     ElevationResult elevation(const Route& route) const;
+     SlopeResult slope(const Route& route) const;
+     SurfaceSlopeResult surfaceSlope(const Route& points, double radius_m) const;
+     TerrainSectionResult terrainSection(const Route& route, const TerrainSectionConfig& config) const;
++    // All interpolation, plane correction and subtraction stay encrypted.
++    SightSurfaceEncryptedResult sightSurfaceEncrypted(const SightSurfaceQuery& query) const;
++    // Decrypts only the final signed difference once per batch, then applies max(0,h).
++    // ground_m and regulation_plane_m are intentionally left empty.
+     SightSurfaceResult sightSurface(const SightSurfaceQuery& query) const;
+     EarthworkResult earthwork(const EarthworkQuery& query) const;
++    // Encrypt H, interpolate terrain/boundary heights, and construct all upper,
++    // lower and target differences times quadrature weights without decryption.
++    // The current experimental backend also owns a secret key; this method
++    // itself needs no decrypt operation and does not claim key-role separation.
++    EarthworkSlopeEncryptedResult earthworkSlopeEncrypted(const EarthworkSlopeQuery& query) const;
++    // Owner-side final stage: decrypt candidate vectors, take min/max, diagnose
++    // incompatible envelopes, and sum cut/fill. It does not decrypt raw heights,
++    // but candidates may reveal heights by inversion when H/weights are known.
++    EarthworkSlopeResult finalizeEarthworkSlope(const EarthworkSlopeEncryptedResult& encrypted) const;
++    EarthworkSlopeResult earthworkSlope(const EarthworkSlopeQuery& query) const;
+ 
+ private:
+     const IDtmProvider& dtm_;
+--- original/src/elevation/Elevation.cpp
++++ source/src/elevation/Elevation.cpp
+@@ -2,6 +2,8 @@
+ 
+ #include <algorithm>
+ #include <cmath>
++#include <limits>
++#include <stdexcept>
+ 
+ namespace openfhe_dtm {
+ namespace {
+@@ -13,44 +15,6 @@
+         elevations.push_back(dtm.elevationAt(point));
+     }
+     return elevations;
+-}
+-
+-std::vector<double> computeMethod3(const IDtmProvider& dtm,
+-                                   const IHeBackend& he,
+-                                   const Route& route) {
+-    std::vector<double> decrypted_elevations;
+-    decrypted_elevations.reserve(route.size());
+-    for (std::size_t begin = 0; begin < route.size(); begin += he.slotCount()) {
+-        const std::size_t end = std::min(begin + he.slotCount(), route.size());
+-        std::vector<double> z00, z10, z01, z11;
+-        std::vector<double> w00, w10, w01, w11;
+-        for (std::size_t i = begin; i < end; ++i) {
+-            const InterpolationStencil s = dtm.interpolationStencil(route[i]);
+-            z00.push_back(s.z00_m);
+-            z10.push_back(s.z10_m);
+-            z01.push_back(s.z01_m);
+-            z11.push_back(s.z11_m);
+-            w00.push_back((1.0 - s.dx) * (1.0 - s.dy));
+-            w10.push_back(s.dx * (1.0 - s.dy));
+-            w01.push_back((1.0 - s.dx) * s.dy);
+-            w11.push_back(s.dx * s.dy);
+-        }
+-
+-        // Four encrypted bilinear interpolation contributions.
+-        // elevation path. The provider currently supplies the corner samples;
+-        // a DemDatabase-compatible encrypted stitch store can replace that
+-        // boundary without changing the analysis modules.
+-        const CipherVector c00 = he.mulPlain(he.encrypt(he.encode(z00)), he.encode(w00));
+-        const CipherVector c10 = he.mulPlain(he.encrypt(he.encode(z10)), he.encode(w10));
+-        const CipherVector c01 = he.mulPlain(he.encrypt(he.encode(z01)), he.encode(w01));
+-        const CipherVector c11 = he.mulPlain(he.encrypt(he.encode(z11)), he.encode(w11));
+-        const CipherVector sum = he.add(he.add(c00, c10), he.add(c01, c11));
+-        const PlainVector decrypted = he.decrypt(sum);
+-        decrypted_elevations.insert(
+-            decrypted_elevations.end(), decrypted.values.begin(),
+-            decrypted.values.begin() + static_cast<long>(end - begin));
+-    }
+-    return decrypted_elevations;
+ }
+ 
+ std::vector<double> cumulativeDistances(const Route& route) {
+@@ -101,11 +65,72 @@
+     return samplePlainElevation(dtm_, route);
+ }
+ 
++CipherVector TerrainAnalysis::elevationEncrypted(const Route& route) const {
++    const std::size_t slots = he_.slotCount();
++    if (slots == 0 || route.empty() || route.size() > slots) {
++        throw std::invalid_argument("elevationEncrypted requires 1..slotCount points and nonzero slotCount");
++    }
++
++    std::vector<double> z00, z10, z01, z11;
++    std::vector<double> w00, w10, w01, w11;
++    for (const auto& point : route) {
++        const InterpolationStencil s = dtm_.interpolationStencil(point);
++        if (!std::isfinite(s.z00_m) || !std::isfinite(s.z10_m) ||
++            !std::isfinite(s.z01_m) || !std::isfinite(s.z11_m) ||
++            !std::isfinite(s.dx) || !std::isfinite(s.dy) ||
++            s.dx < 0.0 || s.dx > 1.0 || s.dy < 0.0 || s.dy > 1.0) {
++            throw std::invalid_argument("interpolation stencil requires finite heights and fractions in [0,1]");
++        }
++        z00.push_back(s.z00_m);
++        z10.push_back(s.z10_m);
++        z01.push_back(s.z01_m);
++        z11.push_back(s.z11_m);
++        w00.push_back((1.0 - s.dx) * (1.0 - s.dy));
++        w10.push_back(s.dx * (1.0 - s.dy));
++        w01.push_back((1.0 - s.dx) * s.dy);
++        w11.push_back(s.dx * s.dy);
++    }
++
++    // The provider supplies corner samples at the existing input boundary.
++    // Encoding pads each array to the backend's slot count; it is not encryption.
++    const auto encodeWeights = [&](const std::vector<double>& weights) {
++        // A grid-corner round trip can leave an entire coefficient vector at
++        // e.g. 1e-29. OpenFHE rejects this below-resolution nonzero plaintext,
++        // whereas an exact zero vector is valid. Discard only a whole vector
++        // below double epsilon; the per-height perturbation is bounded by
++        // epsilon times the corresponding maximum corner height.
++        if (std::all_of(weights.begin(), weights.end(), [](double w) {
++                return std::abs(w) < std::numeric_limits<double>::epsilon();
++            })) return he_.encode(std::vector<double>(weights.size(), 0.0));
++        return he_.encode(weights);
++    };
++    const CipherVector c00 = he_.mulPlain(he_.encrypt(he_.encode(z00)), encodeWeights(w00));
++    const CipherVector c10 = he_.mulPlain(he_.encrypt(he_.encode(z10)), encodeWeights(w10));
++    const CipherVector c01 = he_.mulPlain(he_.encrypt(he_.encode(z01)), encodeWeights(w01));
++    const CipherVector c11 = he_.mulPlain(he_.encrypt(he_.encode(z11)), encodeWeights(w11));
++    return he_.add(he_.add(c00, c10), he_.add(c01, c11));
++}
++
+ ElevationResult TerrainAnalysis::elevation(const Route& route) const {
+     ElevationResult result;
+     result.points = route;
+     result.distances_m = cumulativeDistances(route);
+-    result.elevations_m = computeMethod3(dtm_, he_, route);
++    result.elevations_m.reserve(route.size());
++    const std::size_t slots = he_.slotCount();
++    if (slots == 0) {
++        throw std::invalid_argument("elevation requires nonzero slotCount");
++    }
++    for (std::size_t begin = 0; begin < route.size();) {
++        const std::size_t count = std::min(slots, route.size() - begin);
++        const Route batch(route.begin() + begin, route.begin() + begin + count);
++        const PlainVector decrypted = he_.decrypt(elevationEncrypted(batch));
++        if (decrypted.values.size() < count) {
++            throw std::runtime_error("elevation decryption returned too few slots");
++        }
++        result.elevations_m.insert(result.elevations_m.end(), decrypted.values.begin(),
++                                   decrypted.values.begin() + count);
++        begin += count;
++    }
+     return result;
+ }
+ 

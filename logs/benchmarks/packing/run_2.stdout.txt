@@ -1,0 +1,7 @@
+complex probe=(1,2)
+pack16 raw slot0=0.0976562+0.122656i
+right-half slope first actual/expected=12.9696/12.9696
+right-half slope parity mae=4.90009e-07 max=4.35775e-06
+pack: total=32 encrypted=0 skipped=32 mask/list=64
+pack16: total=1 encrypted=0 skipped=1 split-stitches=4
+pack offsets: left=0 right=16384; real/imag split verified

@@ -1,0 +1,47 @@
+{
+  "executable": {
+    "path": "<LOCAL_BUILD>\\earthwork_slope_validation.exe",
+    "sha256": "f1ddba247d402aa6b5fbab2e78eee6c77e036e633f38024ba41daa0243212fe6"
+  },
+  "dataset": {
+    "path": "<LOCAL_DATA>\\taiwan.tdb",
+    "sha256": "a1ae7ba8a61b7138cbceb6f3cf3ec78942603a0a0bc91a71a502f78714be7363"
+  },
+  "source_sha256": {
+    "CMakeLists.txt": "674b9e39642e9de89a2de24f23dde5e0b0010e4271f6a10c8cd33c0d6e423397",
+    "example/bootstrap_validation.cpp": "a2f85350deaa74bca07b5496d2151595601126fac6c7c6d03a7f8669a5d03c36",
+    "example/ckks_encode_probe.cpp": "cfafe5cd8145422cc3a11f7d6c753f208812774593346f37f25270ecef3de425",
+    "example/ckks_honest_probe.cpp": "345c72b429673ce334f1eda39ac16ff45fe001f9f036506dc2673bf36b0c3306",
+    "example/ckks_precision_probe.cpp": "2619b0691c704b7095f7f1fe327de0813574497fd74613e534ad25dc21fa6cb3",
+    "example/ckks_stage_probe.cpp": "5f2c724a09bea136b59d87431e98965ff98ec1d9fccfa583832ba93ac79a7214",
+    "example/convert_neh_to_validation_tdb.cpp": "410a40744c4390f285dc0f4dd78a5b9a550b7d8a86e718a6672ec6870b296314",
+    "example/demo.cpp": "4fb4303a26b7a482dd543e6fdc29a5a68c243ebf77b5014b27a3628a64f76dd3",
+    "example/experiments_validation.cpp": "79bc2ee16c3555d9e7f85569d804e493b89ed2bf24f801220ce912401b4546f4",
+    "example/make_validation_tdb.cpp": "a092876be6a5143584349bce3e7e57d10d72ddbc94a79401ac24318e7356fddb",
+    "example/manifest_validation.cpp": "c5652a0252219a67ca624707a92043424c43153fa02283647416e9061c9640bb",
+    "example/openfhe_official_ckks.cpp": "d736335f378037a2a37aaa975225d5fa524b54e3b3919fff16cb7a12d21861c7",
+    "example/packed_store_validation.cpp": "7ba3a8934e9808df9f7a21b99956ba4a1fc7d5e68c5521b4fdf58030e3b19832",
+    "example/plain_baseline.cpp": "6e03541e7bb857b82c13405ced4c97ca47971b0042815f01b6811f4076fb3600",
+    "example/slope_grid_validation.cpp": "9416fa96f5997c4102c1b3c9caa51925e9248ed0edb5e0ed677938bfd000fafa",
+    "example/synthetic_validation.cpp": "b6318b44ec30e506127b17f64b5b057167123d7670836ad0b5fb827a96d1abec",
+    "include/openfhe_dtm/Analysis.hpp": "f75bb04fab89b8cdfc09fd1126a83d050b1da16eaf728af2fa8012d08d8bbbd1",
+    "include/openfhe_dtm/DtmProvider.hpp": "fa7611c0731c52b2045b518ad9fe2d9964e1fbc98528b60ce43f23fa061d0c5d",
+    "include/openfhe_dtm/EncryptedDem.hpp": "082e79dd16153e198a56b12621a6a73126ccebd127906f9ef7cbc83e76d30995",
+    "include/openfhe_dtm/HeBackend.hpp": "8208d88eee0aab07b79f367afe2cfa0199d058f680070b06f636745377a48ed5",
+    "include/openfhe_dtm/OpenFheBackend.hpp": "7bd29ba6691833805ca537888dc8926127ebcea5a04c7a835b13c0eac4ca4cdf",
+    "include/openfhe_dtm/RunOptions.hpp": "f3fb4dce0f3b3dd4e0982818c31a5dcd5c199102db7c7a70d112b0a0226f5388",
+    "include/openfhe_dtm/SlopeGrid.hpp": "9eb19b29f85c17f847cfe49162da4782ea971b06db75d1dbab24883fae7b3af9",
+    "include/openfhe_dtm/TdbDataset.hpp": "6806cef874dd5b58eeac1c803c385989ca5cb48441274262dcb3273f4692c246",
+    "src/Analysis.cpp": "f87a4d025eb6325ad064b963f9ed4aab340d464127ea2777ec0fd51e175726b5",
+    "src/dem/EncryptedDem.cpp": "7208677530e05afd64d2b122316e8d9deac17b0a27e75ce7a90cf1c6d192421b",
+    "src/DtmProvider.cpp": "08e503ba077e1532244eca0fa07399118bc4765ad53cf40067d9139f02be1c1a",
+    "src/earthwork/Excavation.cpp": "53471f3aae923df9362a2f64651bfdbb9e41abdba83588813ba2eb8e7af20f38",
+    "src/elevation/Elevation.cpp": "11d4b0ad08118aee7c315d41a424dc3d9b434b6802c9edd2e7ca14e9359a4a64",
+    "src/OpenFheBackend.cpp": "150b04a2ffb341ea580d7a389b9fe9fa22b8d53a1fff96132d734fd7b77de56d",
+    "src/slope/SlopeGrid.cpp": "bb3c0c18d7789657524ffb2b4e3e9f54bf3ad02c9367c4e177398596a68cb846",
+    "src/TdbDataset.cpp": "fa5a8a9081b5aee7d4fd3e692a1369d18f4ef1a7227b2925b327e02f698d4862"
+  },
+  "runs": 4,
+  "exit_code": 0,
+  "recorded_at": "2026-09-24T13:32:37.840423+09:00"
+}

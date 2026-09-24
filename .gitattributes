@@ -1,0 +1,2 @@
+# Preserve the exact bytes referenced by validation SHA-256 records.
+* -text
