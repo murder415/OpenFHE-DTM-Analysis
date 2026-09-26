@@ -58,7 +58,7 @@ V ← u − Σ max(0, e_i)                       # 양수(경사면 위로 솟�
 
 ## 빌드
 
-검증 환경은 Windows 10, GCC 16.1.0 MinGW, C++17, OpenFHE 1.5.1이다. CMake 3.20 이상과 컴파일러 ABI가 호환되는 OpenFHE 개발 설치가 필요하다.
+검증 환경은 Windows 10, GCC 16.1.0 MinGW, C++17, OpenFHE 1.5.1이며, 대만 DEM 시험은 10회 반복해 평균을 냈다. CMake 3.20 이상과 컴파일러 ABI가 호환되는 OpenFHE 개발 설치가 필요하다.
 
 ```sh
 cmake -S . -B build -DOpenFHE_DIR="<OpenFHEConfig.cmake 디렉터리>" -DCMAKE_BUILD_TYPE=Release
