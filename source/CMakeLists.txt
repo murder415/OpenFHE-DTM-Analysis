@@ -8,6 +8,7 @@ add_library(openfhe_dtm_core STATIC
     src/OpenFheBackend.cpp
     src/TdbDataset.cpp
     src/elevation/Elevation.cpp
+    src/elevation/PackedElevation.cpp
     src/earthwork/Excavation.cpp
     src/earthwork/ThetaPlane.cpp
     src/earthwork/CutSlope.cpp

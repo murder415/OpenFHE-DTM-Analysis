@@ -120,4 +120,46 @@ CutSlopeResult cutSlopeEarthwork(const CutSlopeQuery& q, TerrainAnalysis& analys
     r.net_fill_minus_cut_m3 = static_cast<double>(in_sum - cut);
     return r;
 }
+
+CutSlopeResult cutSlopeEarthworkPacked(const CutSlopeQuery& q, PackedElevation& elevation) {
+    const IHeBackend& he = elevation.backend();
+    CutSlopeResult r;
+    r.geometry = buildGeometry(q);
+    const auto& g = r.geometry;
+    const std::size_t S = he.slotCount();
+    elevation.encryptFor(g.points);                                          // provider
+    const IndexedCipher cz = elevation.mergeDisjoint(elevation.interpolate(g.points));  // ground z
+    const CipherVector cH = he.encrypt(he.encode(std::vector<double>(S, q.design_height_m)));  // H
+    CipherVector cin;
+    bool first = true;
+    IndexedCipher cout;
+    cout.point_count = g.points.size();
+    for (const auto& b : cz.batches) {
+        std::vector<double> Ain(S, 0.0), Aout(S, 0.0), s(S, 0.0);
+        for (std::size_t k = 0; k < b.points.size(); ++k) {
+            Ain[b.slots[k]] = g.inside_w[b.points[k]];
+            Aout[b.slots[k]] = g.outside_w[b.points[k]];
+            s[b.slots[k]] = g.slope_height[b.points[k]];
+        }
+        const CipherVector part = he.sumSlots(he.mulPlain(he.sub(cH, b.ciphertext), he.encode(Ain)));
+        cin = first ? part : he.add(cin, part);                             // sum (H - z) A_in
+        first = false;
+        cout.batches.push_back({he.mulPlain(he.subPlain(b.ciphertext, he.encode(s)), he.encode(Aout)),
+                                b.slots, b.points});                         // (z - s) A_out
+    }
+    // Owner side: one scalar decryption plus one per merged batch.
+    const long double in_sum = he.decrypt(cin).values.at(0);
+    const std::vector<double> vout = elevation.decrypt(cout, &r.decryptions);
+    r.decryptions += 1;
+    r.batches = cz.batches.size();
+    long double cut = 0;
+    for (std::size_t i = 0; i < vout.size(); ++i) {
+        if (vout[i] > 0) cut += vout[i];
+        if (g.outer_edge[i] && g.outside_w[i] > 0 && vout[i] > 1e-9 * g.outside_w[i]) ++r.unfinished_slope_points;
+    }
+    r.inside_fill_minus_cut_m3 = static_cast<double>(in_sum);
+    r.slope_cut_m3 = static_cast<double>(cut);
+    r.net_fill_minus_cut_m3 = static_cast<double>(in_sum - cut);
+    return r;
+}
 } // namespace cutslope

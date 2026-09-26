@@ -76,7 +76,7 @@ std::string manifestJson(std::size_t slots, uint32_t depth, bool bootstrap,
         << "  \"bootstrap_level_budget\": [3, 3],\n"
         << "  \"key_set_id\": \"" << key_tag << "\",\n"
         << "  \"rotation_indices\": [1, -1, 2, -2, 4, -4, 8, -8";
-    if (slots >= 16384) out << ", 16, -16, 32, -32, 64, -64, 128, -128";
+    if (slots >= 16384) out << ", 16, -16, 32, -32, 64, -64, 128, -128, 129";
     out << "]\n}\n";
     return out.str();
 }
@@ -138,7 +138,7 @@ OpenFheBackend::OpenFheBackend(std::size_t slots, std::filesystem::path state_di
                                            (impl_->bootstrap_enabled ? "true," : "false,"));
         requireManifestField(manifest, "\"bootstrap_level_budget\": [3, 3]");
         const std::string expected_rotations = slots >= 16384
-            ? "\"rotation_indices\": [1, -1, 2, -2, 4, -4, 8, -8, 16, -16, 32, -32, 64, -64, 128, -128]"
+            ? "\"rotation_indices\": [1, -1, 2, -2, 4, -4, 8, -8, 16, -16, 32, -32, 64, -64, 128, -128, 129]"
             : "\"rotation_indices\": [1, -1, 2, -2, 4, -4, 8, -8]";
         requireManifestField(manifest, expected_rotations);
         if (!lbcrypto::Serial::DeserializeFromFile(context_path.string(), impl_->cc,
@@ -204,7 +204,7 @@ OpenFheBackend::OpenFheBackend(std::size_t slots, std::filesystem::path state_di
     }
     std::vector<int32_t> rotations{1, -1, 2, -2, 4, -4, 8, -8};
     if (slots >= 16384) {
-        rotations.insert(rotations.end(), {16, -16, 32, -32, 64, -64, 128, -128});
+        rotations.insert(rotations.end(), {16, -16, 32, -32, 64, -64, 128, -128, 129});
     }
     impl_->cc->EvalRotateKeyGen(impl_->keys.secretKey, rotations);
     // 전체 slot 합(EvalSum)에 필요한 자동형태(automorphism) 키. 순 토공량 등 격자 전역
