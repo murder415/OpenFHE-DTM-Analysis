@@ -34,7 +34,7 @@ GeoPoint offsetPoint(const GeoPoint& o, double east, double north) {
             o.lat + north / kEarthRadiusM * 180.0 / kPi};
 }
 
-// Same sample line as TerrainAnalysis::sightSurface (base point first).
+// Sample line from base to max_distance in the query direction (base point first).
 Route sightLine(const SightSurfaceQuery& q) {
     const auto [e, n] = localVectorM(q.base, q.direction);
     const double len = std::hypot(e, n);

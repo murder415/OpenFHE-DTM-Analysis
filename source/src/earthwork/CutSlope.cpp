@@ -89,38 +89,6 @@ CutSlopeGeometry buildGeometry(const CutSlopeQuery& q) {
     return g;
 }
 
-CutSlopeResult cutSlopeEarthwork(const CutSlopeQuery& q, TerrainAnalysis& analysis, const IHeBackend& he) {
-    CutSlopeResult r;
-    r.geometry = buildGeometry(q);
-    const auto& g = r.geometry;
-    const std::size_t S = he.slotCount(), n = g.points.size();
-    long double in_sum = 0, cut = 0;
-    for (std::size_t b0 = 0; b0 < n; b0 += S) {
-        const std::size_t m = std::min(S, n - b0);
-        const Route pts(g.points.begin() + b0, g.points.begin() + b0 + m);
-        const std::vector<double> Ain(g.inside_w.begin() + b0, g.inside_w.begin() + b0 + m);
-        const std::vector<double> Aout(g.outside_w.begin() + b0, g.outside_w.begin() + b0 + m);
-        const std::vector<double> s(g.slope_height.begin() + b0, g.slope_height.begin() + b0 + m);
-        // Encrypted part: no decryption until both vectors are formed.
-        const CipherVector cz = analysis.elevationEncrypted(pts);                                   // ground z
-        const CipherVector cH = he.encrypt(he.encode(std::vector<double>(m, q.design_height_m)));    // H
-        const CipherVector cin = he.sumSlots(he.mulPlain(he.sub(cH, cz), he.encode(Ain)));          // sum (H - z) A_in
-        const CipherVector cout = he.mulPlain(he.subPlain(cz, he.encode(s)), he.encode(Aout));      // (z - s) A_out
-        // Owner side: two decryptions per batch.
-        in_sum += he.decrypt(cin).values.at(0);
-        const auto vout = he.decrypt(cout).values;
-        r.decryptions += 2; ++r.batches;
-        for (std::size_t i = 0; i < m; ++i) {
-            if (vout[i] > 0) cut += vout[i];
-            if (g.outer_edge[b0 + i] && Aout[i] > 0 && vout[i] > 1e-9 * Aout[i]) ++r.unfinished_slope_points;
-        }
-    }
-    r.inside_fill_minus_cut_m3 = static_cast<double>(in_sum);
-    r.slope_cut_m3 = static_cast<double>(cut);
-    r.net_fill_minus_cut_m3 = static_cast<double>(in_sum - cut);
-    return r;
-}
-
 CutSlopeResult cutSlopeEarthworkPacked(const CutSlopeQuery& q, PackedElevation& elevation) {
     const IHeBackend& he = elevation.backend();
     CutSlopeResult r;

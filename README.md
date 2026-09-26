@@ -1,76 +1,64 @@
 # OpenFHE DTM Analysis
 
-OpenFHE CKKS를 사용하는 **C++17 지형 분석 코드**다. Python은 필요하지 않다.
+OpenFHE CKKS(32,768 슬롯)를 사용하는 **C++17 암호문 지형 분석 코드**다. Python은 필요하지 않다.
 
-- 고도 보간과 시곡면 가용 높이 계산
-- 기준 높이 H와 평면 기울기 θ를 입력받는 **평면 순 토공량** 계산
-- 암호문 DEM 타일 패킹·저장·복원 및 격자 경사도 라이브러리
+- 암호화한 **패킹 DEM**을 회전해 고도를 보간
+- 시곡면 가용 높이
+- 계획고 H와 굴착각 φ를 입력받는 **경사면 반영 순 토공량**
 
-현재 논문의 토공량에 대응하는 API는 `earthworkTheta()`이고 실행 예제는 **`theta_plane_demo`**다. 영역의 첫 점에서 둘째 점으로 향하는 방향으로 평면을 기울이며, 순 토공량은 **성토량−절토량**이다. 이전의 영역 안쪽 경계 사면 모델 `earthworkSlope()`는 별도 API로 보존되어 있다.
+원본 DEM과 비밀키는 발주처가 보유한다. 발주처가 DEM을 한 번 패킹해 암호화하면, 서버는 암호문을 회전하고 평문 가중치를 곱해 계산한다. 마지막 결과만 복호한다.
 
-## 평면 토공량의 계산
+## 고도 보간 (`PackedElevation`)
 
-첫 점을 원점으로 하는 동·북 좌표에서 첫 변의 단위 방향을 `(u_x,u_y)`라 한다.
+64×64 타일 네 장을 128×128 묶음(stitch)으로 합쳐, 두 묶음을 한 암호문(32,768 슬롯)에 담는다. 한 슬롯에 DEM 셀 하나가 들어간다. 묶음은 타일 하나씩 겹치므로 어떤 점의 네 모서리도 항상 같은 암호문 안에 있다.
 
-```text
-d_i = x_i*u_x + y_i*u_y
-s_i = H + d_i*tan(theta)
-V   = sum((s_i - z_i)*A_c)
-```
-
-`d_i`는 그 방향으로 잰 부호 있는 투영거리다. H는 첫 점에서의 평면 높이이며, θ는 수평면에 대한 기울기다. API·명령행에서는 각도를 **도** 단위로 입력하고 내부에서 라디안으로 바꾼다. `-90<θ<90`이며 θ=0이면 수평면이다. 양수 θ에서는 첫 점→둘째 점 방향으로 높아지고 음수에서는 낮아진다. 첫 두 점의 순서를 바꾸면 방향과 H의 기준점도 바뀐다.
-
-영역의 외접 사각형에 일정 간격의 정사각형 격자를 만들고, 중심이 영역 안에 있는 셀을 선택한다. 셀 중심에서 고도를 보간하고, 각 높이 차에 `A_c=표본 간격²`를 곱한다. 경계 셀도 선택되면 전체 면적을 사용한다. 모든 표본을 한 묶음으로 처리하므로 `1<=n<=S`여야 한다. 표본이 슬롯보다 많으면 오류를 반환한다.
+점 p가 셀 (x0, y0)에 있을 때 서버는 그 셀의 슬롯 t와 셀 안 상대 위치 (dx, dy)만 평문으로 안다.
 
 ```text
-[순 토공량] 보간 암호문 c_z 사용
-6: s[1,…,n] ← H+d*tan(theta)
-7: A_i ← A_c (i≤n), A_i ← 0 (n<i≤S)
-8: c_delta ← Encode_0(s)−c_z
-9: c_v ← c_delta⊙Encode_0(A)
-10: c_V ← EvalSum(c_v,S)
-11: V ← Dec_sk(c_V)[1]
+c10 = Rot(C, 1), c01 = Rot(C, 128), c11 = Rot(C, 129)   # 오른쪽·위·대각 이웃을 슬롯 t로
+c_z = C⊙w00 + c10⊙w10 + c01⊙w01 + c11⊙w11              # w는 슬롯 t에만 쌍선형 가중치
 ```
 
-공개 설계고에서 암호화된 지반고를 빼며 결과는 암호문이다. `plainSub()`는 OpenFHE의 `EvalSub(평문, 암호문)`을 호출한다. 양의 면적을 곱하고 암호문 안의 값을 합산한 뒤 **최종 합계만 한 번 복호**한다. 빈 슬롯은 면적 가중치 0을 곱해 합산에서 제외한다. 성토는 양수, 절토는 음수이므로 최종 값은 성토−절토다.
+회전은 묶음 암호문마다 3번이며 그 묶음의 모든 점이 함께 쓴다. 표본 i의 값은 슬롯 t_i에 있다. 쓰는 슬롯이 다른 묶음 결과끼리 더해 복호 횟수를 줄인다.
 
-좌표·θ·H·설계고·면적은 공개 평문이며 DEM 고도가 암호화 대상이다. 이 API는 순량만 계산하고 개별 절토량·성토량이나 지반고를 출력하지 않는다. 같은 DEM·표본·면적으로 구한 평문 결과와의 수치 차이가 실제 지형에 대한 측량 정확도를 뜻하지는 않는다.
+## 시곡면 (`sightSurfacePacked`)
 
-## 굴착 경사면 토공량 (CutSlope)
+기준점 b에서 방향 q로 거리 L을 간격 Δ로 등분한 표본의 땅 높이 c_g를 보간한다. 기준점 슬롯만 1인 마스크를 곱하고 모든 슬롯을 더해(EvalSum) z_b를 모든 슬롯에 복사한다. 여기에 d_i·tanθ를 더한 기준면에서 c_g를 빼고, 마지막에 한 번 복호해 음수를 0으로 바꾼다. 지형의 가림은 판정하지 않는다.
 
-`openfhe_dtm/CutSlope.hpp`의 `cutslope::cutSlopeEarthwork`는 계획고 H로 영역을 평탄화하고, 영역 밖 공개 폭 W의 띠에 굴착각 θ의 경사면을 둔다.
+## 경사면 반영 순 토공량 (`cutSlopeEarthworkPacked`)
 
-- 영역과 띠 위에 간격 이하의 격자를 만들고, 셀 면적 A_c/4를 공유 꼭짓점에 더한 가중치(영역 안 A, 띠 A′)를 쓴다(점고법).
-- 영역 밖 꼭짓점은 경계선까지의 최단거리 d 하나로 경사면 높이 s = H + d·tanθ를 정한다.
-- 암호문으로 Σ(H−z)A를 슬롯 합산하고, (z−s)A′ 벡터를 만든다. 묶음마다 두 암호문만 복호한다.
-- 순량 = 영역 안(성토−절토) − 경사면 굴착(양수만 합산).
+영역 안은 계획고 H로 평평하게 만들고, 영역 경계선에서 바깥쪽으로 거리 W 안의 외곽 영역에는 굴착각 φ의 경사면을 둔다. 꼭짓점 p_i에서 경계선까지의 최단 거리를 ρ_i라 하면 경사면 높이는 s_i = H + ρ_i·tanφ다.
 
-H·θ·W·좌표·가중치는 공개 평문이고, 지반고는 보간 암호문이다. `tests/cut_slope_validation.cpp`는 합성 경사 평면에서 독립 평문 합계와 비교하고 잘못된 입력 거부를 검사한다.
+두 영역을 한 변이 Δ_v 이하인 셀로 나누고, 중심이 두 영역 안에 있는 셀의 꼭짓점을 표본으로 쓴다. 셀 하나의 넓이 A_c는 네 꼭짓점이 A_c / 4씩 나눠 맡는다(점고법). 영역 안 가중치는 A, 외곽 가중치는 A′다.
 
-## 구성과 API
+```text
+c_z ← InterpEnc(P)
+s   ← H + ρ·tanφ
+c_δ ← Enc(Encode0(H,…,H)) − c_z
+c_u ← EvalSum(c_δ ⊙ Encode0(A))            # 영역 안 성토−절토 합계
+c_e ← (c_z − Encode0(s)) ⊙ Encode0(A′)     # 외곽 꼭짓점별 (땅−경사면)×면적
+u ← Dec(c_u)[1], e ← Dec(c_e)
+V ← u − Σ max(0, e_i)                       # 양수(경사면 위로 솟은 땅)만 굴착량
+```
 
-| 경로 또는 API | 용도 |
+순 토공량은 **성토 − 절토**다. H·φ·W·좌표·가중치는 공개 평문이고 DEM 고도가 암호화 대상이다. 외곽 영역은 깎는 경사면만 계산하며 성토 비탈은 다루지 않는다.
+
+## 구성
+
+| 경로 | 용도 |
 | --- | --- |
-| `source/include/openfhe_dtm/EarthworkTheta.hpp` | 평면 θ 입력과 암호문·최종 결과 자료형 |
-| `source/src/earthwork/ThetaPlane.cpp` | 현재 논문의 θ 평면 토공량 구현 |
-| `theta_plane_demo.cpp` | θ 평면 토공량 실행 예제 |
-| `tests/theta_plane_validation.cpp` | 실제 OpenFHE와 독립 평문 기준, 연산·복호 시점 검사 |
-| `source/example/make_validation_tdb.cpp` | 합성 DEM 입력 생성 |
-| `source/example/convert_neh_to_validation_tdb.cpp` | TWD97 N/E/H CSV 입력 변환 |
-
-`earthworkThetaEncrypted()`는 최종 합계 암호문을 반환하고, `finalizeEarthworkTheta()`가 이를 한 번 복호한다. `earthworkTheta()`는 두 단계를 연속 실행한다. 고도 보간의 `elevationEncrypted()`는 암호문을 반환한다. 시곡면의 `sightSurfaceEncrypted()`는 높이 차까지 암호문으로 계산하고, `sightSurface()`는 마지막 높이 차를 복호하여 0과 비교한다. 시곡면은 지형의 가림을 판정하지 않는다.
-
-기존 모델은 다음과 같이 구분한다. **평면 논문의 재현에는 첫 행을 사용한다.**
-
-| API / 예제 | 모델과 복호 시점 | 부호 |
-| --- | --- | --- |
-| `earthworkTheta()` / `theta_plane_demo` | H·θ 평면, 암호문 합산 후 최종 합계 복호 | 성토−절토 |
-| `earthworkSlope()` / `final_analysis_demo` | 영역 안쪽 경계 사면, 최종 후보 복호 후 min/max·집계 | 성토−절토 |
-| 기존 `TerrainAnalysis::earthwork()` | `a_x,a_y` 평면을 사용하는 이전 API | 절토−성토 |
+| `source/include/openfhe_dtm/PackedElevation.hpp`, `source/src/elevation/PackedElevation.cpp` | 패킹 DEM 암호화, 회전 보간, 시곡면 |
+| `source/include/openfhe_dtm/CutSlope.hpp`, `source/src/earthwork/CutSlope.cpp` | 경사면 반영 순 토공량 |
+| `source/include/openfhe_dtm/EncryptedDem.hpp`, `source/src/dem/EncryptedDem.cpp` | 패킹 암호문 저장·복원 |
+| `source/include/openfhe_dtm/OpenFheBackend.hpp`, `source/src/OpenFheBackend.cpp` | OpenFHE CKKS 백엔드(회전 키 ±1…±128, 129) |
+| `source/include/openfhe_dtm/TdbDataset.hpp`, `DtmProvider.hpp` | DEM 입력 |
+| `analysis_demo.cpp` | TDB 입력으로 시곡면·순 토공량 실행 |
+| `tests/cut_slope_validation.cpp` | 합성 경사 평면에서 보간·시곡면·토공량을 독립 평문과 비교, 잘못된 입력 거부 |
+| `source/example/make_validation_tdb.cpp`, `convert_neh_to_validation_tdb.cpp` | 합성 DEM 생성, TWD97 N/E/H CSV 변환 |
 
 ## 빌드
 
-검증 환경은 Windows 10, GCC 16.1.0 MinGW, C++17, OpenFHE 1.5.1이다. CMake 3.20 이상과 컴파일러 ABI가 호환되는 OpenFHE 개발 설치가 필요하다. 저장소 최상위에서 실행한다.
+검증 환경은 Windows 10, GCC 16.1.0 MinGW, C++17, OpenFHE 1.5.1이다. CMake 3.20 이상과 컴파일러 ABI가 호환되는 OpenFHE 개발 설치가 필요하다.
 
 ```sh
 cmake -S . -B build -DOpenFHE_DIR="<OpenFHEConfig.cmake 디렉터리>" -DCMAKE_BUILD_TYPE=Release
@@ -78,29 +66,12 @@ cmake --build build --parallel 2
 ctest --test-dir build --output-on-failure
 ```
 
-Windows에서 MinGW를 명시하는 예는 다음과 같다. 생성기를 바꾸면 새 빌드 폴더를 사용한다.
-
-```sh
-cmake -S . -B build -G "MinGW Makefiles" -DCMAKE_CXX_COMPILER="<MinGW bin>/g++.exe" -DCMAKE_MAKE_PROGRAM="<MinGW bin>/mingw32-make.exe" -DOpenFHE_DIR="<OpenFHE CMake 디렉터리>" -DCMAKE_BUILD_TYPE=Release
-```
-
-## 실행과 검증
+## 실행
 
 ```sh
 build/make_validation_tdb.exe sample.tdb
-build/theta_plane_demo.exe sample.tdb 100 15 10
-build/theta_plane_demo.exe "<dem.tdb>" 14.76 0 915.75
+build/analysis_demo.exe sample.tdb            # H=14.76 m, 굴착각 45°
+build/analysis_demo.exe "<dem.tdb>" 20 30     # H=20 m, 굴착각 30°
 ```
 
-인자는 **텍스트 TDB 경로, 기준 높이 H(m), 평면 기울기 θ(도), 선택적인 표본 간격(m)** 순서다. 실행 예제는 2,048슬롯과 설정 깊이 3을 사용하며, DEM 안의 사각형 구역을 구성한다. 임의 다각형은 `EarthworkThetaQuery::polygon`으로 전달한다. GeoTIFF를 직접 읽거나 별도 타일 패킹 시험을 실행하지 않는다.
-
-```sh
-build/convert_neh_to_validation_tdb.exe input.csv output.tdb
-build/theta_plane_validation.exe "<대만 DEM.tdb>"
-```
-
-기본 CTest는 외부 DEM 없이 13개 수치·연산 추적 사례와 17개 잘못된 입력을 검사한다. 선택적인 대만 TDB 인자를 주면 기존 144점 배치의 θ=0°, 10° 비교를 추가해 15개 수치·추적 사례가 된다. 테스트는 독립 `long double` 평문 기준과 비교하며, 네 꼭짓점 벡터의 초기 암호화 4회, 중간 복호 0회, 암호문 합산 1회, 마지막 복호 1회를 확인한다. 정상·역방향·음의 θ·부호 있는 거리·빈 슬롯·슬롯 초과를 포함한다.
-
-이 테스트는 현재 `Encode_0(s)−c_z`와 양의 면적을 사용하는 구현을 검증한다. 논문의 기존 4회 측정은 수학적으로 같은 `(z−s)×(−A)`를 사용한 앞선 구현 기록이다. 그 기록을 현재 소스의 4회 재측정 결과로 표시하지 않으며, 기본 검증 실행은 논문의 반복 성능 측정을 대체하지 않는다.
-
-대만 DEM·키·실행 파일·Python 도구는 저장소에 포함하지 않는다. Linux 계열에서는 실행 파일의 `.exe`를 생략한다. 다른 도구 모음에서의 전체 빌드는 확인하지 않았다. 현재 단일 프로세스 구현이며 서버 간 비밀키·입력 분리는 별도 구현 대상이다.
+DEM 안에 사각형 영역과 시선을 만들어 시곡면과 순 토공량을 계산하고, 사용한 패킹 암호문 수·회전 횟수·복호 횟수를 출력한다. 대만 DEM·키·실행 파일은 저장소에 포함하지 않는다. 현재 단일 프로세스 구현이며 서버 간 비밀키·입력 분리는 별도 구현 대상이다.

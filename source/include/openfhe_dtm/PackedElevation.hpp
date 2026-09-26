@@ -12,7 +12,6 @@
 // Stitches overlap by one tile (stitch (tx, ty) covers tiles tx..tx+1, ty..ty+1)
 // and a point uses the stitch of its own tile, so the local cell is at most 63
 // and all four corners always lie in that one stitch: no cross-stitch case.
-#include "openfhe_dtm/Analysis.hpp"
 #include "openfhe_dtm/EncryptedDem.hpp"
 
 #include <map>
@@ -20,6 +19,14 @@
 #include <vector>
 
 namespace openfhe_dtm {
+
+struct SightSurfaceQuery {
+    GeoPoint base;
+    GeoPoint direction;
+    double angle_degrees = 15.0;   // regulation-plane angle theta
+    double max_distance_m = 90.0;
+    double sample_interval_m = 10.0;
+};
 
 struct IndexedBatch {
     CipherVector ciphertext;          // value of point points[k] sits in slot slots[k]

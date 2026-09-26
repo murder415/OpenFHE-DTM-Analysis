@@ -3,17 +3,12 @@ project(openfhe_dtm_core LANGUAGES CXX)
 
 find_package(OpenFHE CONFIG REQUIRED)
 add_library(openfhe_dtm_core STATIC
-    src/Analysis.cpp
     src/DtmProvider.cpp
     src/OpenFheBackend.cpp
     src/TdbDataset.cpp
-    src/elevation/Elevation.cpp
     src/elevation/PackedElevation.cpp
-    src/earthwork/Excavation.cpp
-    src/earthwork/ThetaPlane.cpp
     src/earthwork/CutSlope.cpp
     src/dem/EncryptedDem.cpp
-    src/slope/SlopeGrid.cpp
 )
 target_compile_features(openfhe_dtm_core PUBLIC cxx_std_17)
 target_compile_definitions(openfhe_dtm_core PUBLIC OPENFHE_DTM_ENABLE_OPENFHE=1)

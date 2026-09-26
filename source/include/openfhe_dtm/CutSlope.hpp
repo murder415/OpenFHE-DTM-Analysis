@@ -4,7 +4,6 @@
 // Written from the public V-World 3D analysis manual description (not the
 // boundary-cone min/max method): each outside vertex uses ONE public distance to
 // the polygon boundary, s = H + d*tan(theta); only terrain above s is cut.
-#include "openfhe_dtm/Analysis.hpp"
 #include "openfhe_dtm/PackedElevation.hpp"
 #include <array>
 #include <vector>
@@ -42,8 +41,7 @@ struct CutSlopeResult {
 };
 
 CutSlopeGeometry buildGeometry(const CutSlopeQuery& q);
-CutSlopeResult cutSlopeEarthwork(const CutSlopeQuery& q, TerrainAnalysis& analysis, const IHeBackend& he);
-// Same model on the encrypted packed DEM: ground heights come from rotation
-// interpolation, so the provider never encrypts per-point corner heights.
+// Ground heights come from rotation interpolation on the encrypted packed DEM,
+// so the provider never encrypts per-point corner heights.
 CutSlopeResult cutSlopeEarthworkPacked(const CutSlopeQuery& q, PackedElevation& elevation);
 } // namespace cutslope
